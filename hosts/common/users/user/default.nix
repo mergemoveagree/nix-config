@@ -4,6 +4,8 @@
 , config
 , ...
 }: {
+  hostSpec.username = "user";
+
   sops.secrets = {
     "user_password" = {
       neededForUsers = true;

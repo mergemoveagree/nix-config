@@ -5,12 +5,12 @@
 in {
   imports = (map lib.custom.relativeToRoot [
     "hosts/common/core"
-    "hosts/common/features/sops.nix"
     "hosts/common/features/home-manager.nix"
   ]);
 
   hostSpec = {
     hostName = "asrock";
+    netInterface = "wlan0";
     monitors = [
       {
         portName = "DP-1";

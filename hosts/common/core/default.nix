@@ -1,12 +1,19 @@
 { lib
 , ...
 }: {
-  imports = (map lib.custom.relativeToRoot [
-    "modules/core"
-    "hosts/common/users/admin"
-  ]);
-
-  hostSpec.username = "user";
+  imports = lib.flatten [
+    (map lib.custom.relativeToRoot [
+      "modules/core"
+      "hosts/common/users/admin"
+    ])
+    ./linux-hardening
+    ./chrony.nix
+    ./networking.nix
+    ./openssh.nix
+    ./pipewire.nix
+    ./sops.nix
+    ./thunar.nix
+  ];
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];

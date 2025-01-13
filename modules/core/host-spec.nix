@@ -52,6 +52,17 @@
       type  = types.str;
       description = "The hostname of the host";
     };
+    # TODO: Is this always wlan0 if I'm using iwd?
+    netInterface = mkOption {
+      type = types.str;
+      description = "The network interface of the host";
+      default = "wlan0";
+    };
+    doGaming = mkOption {
+      type = types.bool;
+      description = "Whether to include options for gaming features.";
+      default = false;
+    };
     monitors = mkOption {
       type = types.listOf monitor;
       description = "The monitors used by the host";

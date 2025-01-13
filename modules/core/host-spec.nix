@@ -41,6 +41,11 @@
           description = "The lockscreen to display when idle. Defaults to wallpaper";
           default = null;
         };
+        scale = mkOption {
+          type = types.float;
+          description = "The scale to use for the monitor";
+          default = 1;
+        };
       };
     };
   in {
@@ -58,6 +63,7 @@
       description = "The network interface of the host";
       default = "wlan0";
     };
+    enableZsh = mkEnableOption "ZSH features for primary user";
     doGaming = mkEnableOption "gaming features";
     gamemodeSettings = mkOption {
       type = types.nullOr submodule {

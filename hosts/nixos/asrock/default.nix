@@ -11,6 +11,7 @@ in {
   ]);
 
   hostSpec = {
+    username = "user";
     hostName = "asrock";
     netInterface = "wlan0";
     monitors = [

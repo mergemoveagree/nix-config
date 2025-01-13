@@ -4,25 +4,23 @@
 , config
 , ...
 }: {
-  hostSpec.username = "user";
-
   sops.secrets = {
-    "user_password" = {
+    "user_password_${config.hostSpec.hostName}" = {
       neededForUsers = true;
       sopsFile = lib.custom.relativeToRoot "home/user/secrets.yml";
     };
   };
 
-  users.users."user" = {
-    name = "user";
+  users.users.${config.hostSpec.username} = {
+    name = config.hostSpec.username;
     isNormalUser = true;
     extraGroups = [ "networkmanager" "input" ];
-    hashedPasswordFile = config.sops.secrets."user_password".path;
+    hashedPasswordFile = config.sops.secrets."user_password_${config.hostSpec.hostName}".path;
+  } // lib.optionalAttrs config.hostSpec.enableZsh {
+    programs.zsh.enable = true;
     shell = pkgs.zsh;
   };
-
-  programs.zsh.enable = true;
 }
 // lib.optionalAttrs (inputs ? "home-manager") {
-  home-manager.users."user" = import (lib.relativeToRoot "home/${config.hostSpec.username}/${config.hostSpec.hostName}.nix");
+  home-manager.users.${config.hostSpec.username} = import (lib.relativeToRoot "home/user/${config.hostSpec.hostName}.nix");
 }

@@ -1,13 +1,19 @@
 { lib
+, config
 , ...
 }: with lib; {
   options.hostSpec = let
-    monitor = submodule {
+    monitor = types.submodule {
       options = {
         portName = mkOption {
           type = types.str;
           description = "The name of the port used by the monitor";
           example = "DP-1";
+        };
+        primary = mkOption {
+          type = types.bool;
+          description = "Whether the monitor is the primary monitor";
+          default = false;
         };
         height = mkOption {
           type = types.int.positive;
@@ -84,5 +90,19 @@
       type = types.listOf monitor;
       description = "The monitors used by the host";
     };
+  };
+
+  # Ensure that only one monitor is primary
+  config = mkIf (config.hostSpec.monitors != { }) {
+    assertions = [
+      (let
+        primaries = catAttrs "portName" (filter (a: a.primary) config.hostSpec.monitors);
+      in {
+        assertion = length primaries == 1;
+        message = "Must have exactly one primary monitor, but found "
+          + toString (length primaries) + optionalString (length primaries > 1)
+          (", namely " + concatStringSep ", " primaries);
+      })
+    ];
   };
 }

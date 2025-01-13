@@ -22,6 +22,7 @@ in {
         refreshRate = 160;
         wallpaper = relRoot "wallpapers/sl.jpg";
         lockscreen = relRoot "wallpapers/hsr2.jpg"; 
+        primary = true;
       }
       {
         portName = "DP-2";

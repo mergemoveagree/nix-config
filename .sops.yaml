@@ -1,0 +1,9 @@
+
+keys:
+  - &users:
+    - &user 0581367C097C635BF5839E57282872FA4AF162DE
+creation_rules:
+  - path_regex: home/user/secrets.yml
+    key_groups:
+      - pgp:
+        - *user

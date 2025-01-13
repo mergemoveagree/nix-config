@@ -8,6 +8,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/efi";
+  boot.initrd.systemd.enable = true;
 
   users.mutableUsers = false;
   users.users.root.hashedPassword = "!";

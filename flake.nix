@@ -26,6 +26,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/nixos/${host}
+          inputs.disko.nixosModules.disko
           ./hosts/nixos/${host}/disk.nix
         ];
         specialArgs = {
@@ -39,5 +40,21 @@
     readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
   in {
     nixosConfigurations = mkHostConfigs (readHosts "nixos");
+
+    devShells.x86_64-linux.default = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in pkgs.mkShell {
+      NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+      nativeBuildInputs = with pkgs; [
+        git
+        git-crypt
+        sops
+        gnupg
+        age
+        ssh-to-age
+        pcsclite
+        ccid
+      ];
+    };
   };
 }

@@ -3,7 +3,13 @@ keys:
   - &users:
     - &user 0581367C097C635BF5839E57282872FA4AF162DE
 creation_rules:
-  - path_regex: home/user/secrets.yml
+  # General secrets for all users
+  - path_reges: home/secrets.yml$
+    key_groups:
+      - pgp:
+        - *user
+  # Personal secrets for primary user
+  - path_regex: home/user/secrets.yml$
     key_groups:
       - pgp:
         - *user

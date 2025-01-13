@@ -1,10 +1,35 @@
-{
-  imports = [
-    ../../common/core
+{ lib
+, ...
+}: let
+  relRoot = lib.custom.relativeToRoot;
+in {
+  imports = (map lib.custom.relativeToRoot [
+    "hosts/common/core"
+    "hosts/common/features/sops.nix"
+    "hosts/common/features/home-manager.nix"
+  ]);
 
-    ../../common/features/sops.nix
-    ../../common/features/home-manager.nix
-  ];
-
-  networking.hostName = "asrock";
+  hostSpec = {
+    hostName = "asrock";
+    monitors = [
+      {
+        portName = "DP-1";
+        width = 3440;
+        height = 1440;
+        refreshRate = 160;
+        wallpaper = relRoot "wallpapers/sl.jpg";
+        lockscreen = relRoot "wallpapers/hsr2.jpg"; 
+      }
+      {
+        portName = "DP-2";
+        width = 2560;
+        height = 1440;
+        refreshRate = 144;
+        alignOffsetX = -1920;
+        alignOffsetY = 360;
+        wallpaper = relRoot "wallpapers/rags.jpg";
+        lockscreen = relRoot "wallpapers/hsr.jpg"; 
+      }
+    ];
+  };
 }

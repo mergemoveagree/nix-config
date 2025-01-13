@@ -1,4 +1,13 @@
-{
+{ lib
+, ...
+}: {
+  imports = (map lib.custom.relativeToRoot [
+    "modules/core"
+    "hosts/common/users/admin"
+  ]);
+
+  hostSpec.username = "user";
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;

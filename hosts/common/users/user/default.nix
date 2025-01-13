@@ -7,7 +7,7 @@
   sops.secrets = {
     "user_password" = {
       neededForUsers = true;
-      sopsFile = ../../../../home/user/secrets.yml;
+      sopsFile = lib.custom.relativeToRoot "home/user/secrets.yml";
     };
   };
 
@@ -22,5 +22,5 @@
   programs.zsh.enable = true;
 }
 // lib.optionalAttrs (inputs ? "home-manager") {
-  home-manager.users."user" = import ../../../home/user/${config.networking.hostName}.nix;
+  home-manager.users."user" = import (lib.relativeToRoot "home/${config.hostSpec.username}/${config.hostSpec.hostName}.nix");
 }

@@ -1,4 +1,5 @@
 { lib
+, outputs
 , ...
 }: {
   imports = lib.flatten [
@@ -20,6 +21,10 @@
     auto-optimise-store = true;
     warn-dirty = false;
   };
+
+  nixpkgs.overlays = [
+    outputs.overlays.default
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

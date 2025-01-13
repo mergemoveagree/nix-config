@@ -19,9 +19,15 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {self, nixpkgs, ...}@inputs: let
+    inherit (self) outputs;
     inherit (nixpkgs) lib;
     mkHost = host: {
       ${host} = lib.nixosSystem {
@@ -34,6 +40,7 @@
         specialArgs = {
           inherit
             inputs
+            outputs
           ;
 
           # Will propogate lib.custom to Home Manager
@@ -44,6 +51,8 @@
     mkHostConfigs = hosts: lib.foldl (acc: built: acc // built) {} (lib.map (host: mkHost host) hosts);
     readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
   in {
+    overlays = import ./overlays { inherit inputs; };
+
     nixosConfigurations = mkHostConfigs (readHosts "nixos");
 
     devShells.x86_64-linux.default = let

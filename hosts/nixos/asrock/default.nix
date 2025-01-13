@@ -32,5 +32,10 @@ in {
         lockscreen = relRoot "wallpapers/hsr.jpg"; 
       }
     ];
+    doGaming = true;
+    gamemodeSettings = {
+      gpu_device = 1;
+      amd_performance_level = "auto";
+    };
   };
 }

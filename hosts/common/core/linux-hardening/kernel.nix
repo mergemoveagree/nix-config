@@ -1,4 +1,6 @@
-{
+{ config
+, ...
+}: {
   boot.kernel.sysctl."kernel.kptr_restrict" = 2;
   boot.kernel.sysctl."kernel.dmesg_restrict" = 1;
   boot.kernel.sysctl."kernel.printk" = "3 3 3 3";
@@ -8,7 +10,8 @@
   boot.kernel.sysctl."vm.unprivileged_userfaultfd" = 0;
   boot.kernel.sysctl."kernel.kexec_load_disabled" = 1;
   boot.kernel.sysctl."kernel.sysrq" = 4;
-  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 0;
+  # Need to overwrite kernel.unprivileged_userns_clone for Steam
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = if config.hostSpec.doGaming then 1 else 0;
   boot.kernel.sysctl."kernel.perf_event_paranoid" = 3;
 
   # TODO: Move network filesystems to different module (maybe will eventually need on another host?)

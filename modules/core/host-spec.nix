@@ -58,10 +58,21 @@
       description = "The network interface of the host";
       default = "wlan0";
     };
-    doGaming = mkOption {
-      type = types.bool;
-      description = "Whether to include options for gaming features.";
-      default = false;
+    doGaming = mkEnableOption "gaming features";
+    gamemodeSettings = mkOption {
+      type = types.nullOr submodule {
+        gpu_device = mkOption {
+          types = types.nullOr types.int.unsigned;
+          description = "The index of the GPU device on the host";
+          default = null;
+        };
+        amd_performance_level = mkOption {
+          types = types.nullOr types.str;
+          description = "The performance mode of the AMD GPU";
+          default = null;
+        };
+      };
+      default = null;
     };
     monitors = mkOption {
       type = types.listOf monitor;

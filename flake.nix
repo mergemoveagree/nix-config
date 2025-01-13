@@ -24,13 +24,16 @@
     mkHost = host: {
       ${host} = lib.nixosSystem {
         system = "x86_64-linux";
+        modules = [
+          ./hosts/nixos/${host}
+          ./hosts/nixos/${host}/disk.nix
+        ];
         specialArgs = {
           inherit
             inputs
           ;
         };
       };
-      modules = [ ./hosts/nixos/${host} ];
     };
     mkHostConfigs = hosts: lib.foldl (acc: built: acc // built) {} (lib.map (host: mkHost host) hosts);
     readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});

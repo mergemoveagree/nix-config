@@ -6,6 +6,7 @@ in {
   imports = (map lib.custom.relativeToRoot [
     "hosts/common/core"
     "hosts/common/features/home-manager.nix"
+    "hosts/common/features/mullvad-vpn.nix"
   ]);
 
   hostSpec = {

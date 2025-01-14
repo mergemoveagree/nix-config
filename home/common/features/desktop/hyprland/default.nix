@@ -1,5 +1,6 @@
 { lib
 , config
+, pkgs
 , ...
 }: {
   imports = lib.custom.scanPaths ./.;
@@ -13,4 +14,15 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.systemd.enable = true;
   wayland.windowManager.hyprland.xwayland.enable = true;
+
+  fonts.fontconfig.enable = true;
+  home.packages = with pkgs; [
+    kdePackages.ark
+    kdePackages.okular
+    pavucontrol
+    xwaylandvideobridge
+
+    nerd-fonts.space-mono
+    font-awesome
+  ];
 }

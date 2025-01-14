@@ -7,8 +7,10 @@
 
   programs.kitty = {
     enable = true;
-    enableZshIntegration = config.hostSpec.enableZsh;
-    enableBashIntegration = !config.hostSpec.enableZsh;
+    shellIntegration = {
+      enableZshIntegration = config.hostSpec.enableZsh;
+      enableBashIntegration = !config.hostSpec.enableZsh;
+    };
   };
 
   wayland.windowManager.hyprland.enable = true;

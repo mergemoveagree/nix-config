@@ -17,10 +17,12 @@
     extraGroups = [ "networkmanager" "input" ];
     hashedPasswordFile = config.sops.secrets."user_password_${config.hostSpec.hostName}".path;
   } // lib.optionalAttrs config.hostSpec.enableZsh {
-    programs.zsh.enable = true;
     shell = pkgs.zsh;
   };
+
+  programs.zsh.enable = config.hostSpec.enableZsh;
+
 }
 // lib.optionalAttrs (inputs ? "home-manager") {
-  home-manager.users.${config.hostSpec.username} = import (lib.relativeToRoot "home/user/${config.hostSpec.hostName}.nix");
+  home-manager.users.${config.hostSpec.username} = import (lib.custom.relativeToRoot "home/user/${config.hostSpec.hostName}.nix");
 }

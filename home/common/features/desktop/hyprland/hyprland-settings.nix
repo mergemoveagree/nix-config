@@ -4,7 +4,7 @@
 , ...
 }: {
   wayland.windowManager.hyprland.settings = {
-    monitor = map (monitor: with monitor; "${portName},${width}x${height}@${refreshRate},${alignOffsetX}x${alignOffsetY},${scale}") config.hostSpec.monitors;
+    monitor = map (monitor: with monitor; "${portName},${toString width}x${toString height}@${toString refreshRate},${toString alignOffsetX}x${toString alignOffsetY},${toString scale}") config.hostSpec.monitors;
 
     "$terminal" = "${pkgs.kitty}/bin/kitty -1";
     "$fileManager" = "${pkgs.xfce.thunar}/bin/thunar";

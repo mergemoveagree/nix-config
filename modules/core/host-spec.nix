@@ -16,27 +16,29 @@
           default = false;
         };
         height = mkOption {
-          type = types.int.positive;
+          type = types.ints.positive;
           description = "The height of the monitor";
           example = 1440;
         };
         width = mkOption {
-          type = types.int.positive;
+          type = types.ints.positive;
           description = "The width of the monitor";
           example = 2560;
         };
         refreshRate = mkOption {
-          type = types.int.positive;
+          type = types.ints.positive;
           description = "The refresh rate of the monitor in Hz";
           example = 144;
         };
         alignOffsetX = mkOption {
           type = types.int;
           description = "The x-offset for the monitor relative to other monitors";
+          default = 0;
         };
         alignOffsetY = mkOption {
           type = types.int;
           description = "The y-offset for the monitor relative to other monitors";
+          default = 0;
         };
         wallpaper = mkOption {
           type = types.path;
@@ -50,7 +52,7 @@
         scale = mkOption {
           type = types.float;
           description = "The scale to use for the monitor";
-          default = 1;
+          default = 1.0;
         };
       };
     };

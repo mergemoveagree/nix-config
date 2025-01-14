@@ -1,6 +1,14 @@
 { pkgs
+, lib
+, hostSpec
 , ...
 }: {
+  imports = map lib.custom.relativeToRoot [
+    "modules/core/host-spec.nix"
+  ];
+
+  inherit hostSpec;
+
   home.packages = with pkgs; [
     wl-clipboard-rs
   ];

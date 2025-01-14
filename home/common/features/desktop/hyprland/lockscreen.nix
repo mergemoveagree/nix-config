@@ -12,16 +12,15 @@
     vibrancy_darkness = 0.0;
   };
   primary_monitor = lib.lists.findFirst ({primary, ...}: primary) null config.hostSpec.monitors;
-  verify_monitor = lib.throwIfNot (primary_monitor != null) "No primary monitor found.";
 in {
   programs.hyprlock.enable = true;
   programs.hyprlock.settings = {
-    background = map ({ portName, lockscreen, ... }: {
+    background = map ({ portName, lockscreen, wallpaper, ... }: {
       monitor = portName;
-      path = lockscreen;
+      path = if lockscreen != null then "${lockscreen}" else wallpaper;
     } // common_settings) config.hostSpec.monitors;
     input-field = {
-      monitor = verify_monitor primary_monitor;
+      monitor = primary_monitor.portName;
       size = "200, 50";
       outline_thickness = 3;
       dots_size = 0.33; # Scale of input-field height, 0.2 - 0.8

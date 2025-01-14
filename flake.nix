@@ -43,7 +43,6 @@
             outputs
           ;
 
-          # Will propogate lib.custom to Home Manager
           lib = nixpkgs.lib.extend (self: super: { custom = import ./lib { inherit (nixpkgs) lib; }; });
         };
       };

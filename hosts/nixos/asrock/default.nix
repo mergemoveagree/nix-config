@@ -35,6 +35,7 @@ in {
         lockscreen = relRoot "wallpapers/hsr.jpg"; 
       }
     ];
+    enableZsh = true;
     doGaming = true;
     gamemodeSettings = {
       gpu_device = 1;

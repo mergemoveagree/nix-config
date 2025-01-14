@@ -1,5 +1,6 @@
 { inputs
 , pkgs
+, config
 , ...
 }: {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -9,6 +10,7 @@
       inputs
       pkgs
     ;
+    hostSpec = config.hostSpec;
   };
   home-manager.useGlobalPkgs = true;
 }

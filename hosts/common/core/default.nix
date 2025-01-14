@@ -5,6 +5,7 @@
   imports = lib.flatten [
     (map lib.custom.relativeToRoot [
       "modules/core"
+      "hosts/common/users/user"
       "hosts/common/users/admin"
     ])
     ./linux-hardening

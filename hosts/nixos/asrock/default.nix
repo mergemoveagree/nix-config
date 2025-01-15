@@ -5,13 +5,15 @@
 in {
   imports = (map lib.custom.relativeToRoot [
     "hosts/common/core"
+    
+    "hosts/common/users/user"
+
     "hosts/common/features/home-manager.nix"
     "hosts/common/features/mullvad-vpn.nix"
     "hosts/common/features/hyprland.nix"
   ]);
 
   hostSpec = {
-    username = "user";
     hostName = "asrock";
     netInterface = "wlan0";
     monitors = [

@@ -57,10 +57,6 @@
       };
     };
   in {
-    username = mkOption {
-      type = types.str;
-      description = "The username of the primary user on the host";
-    };
     hostName = mkOption {
       type  = types.str;
       description = "The hostname of the host";

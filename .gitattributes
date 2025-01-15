@@ -1,0 +1,2 @@
+home/user/features/thunderbird-aliases.json filter=git-crypt diff=git-crypt
+home/user/global/mail.nix filter=git-crypt diff=git-crypt

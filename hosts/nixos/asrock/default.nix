@@ -3,15 +3,20 @@
 }: let
   relRoot = lib.custom.relativeToRoot;
 in {
-  imports = (map lib.custom.relativeToRoot [
-    "hosts/common/core"
-    
-    "hosts/common/users/user"
+  imports = lib.flatten [
+    (map lib.custom.relativeToRoot [
+      "hosts/common/core"
+      
+      "hosts/common/users/user"
 
-    "hosts/common/features/home-manager.nix"
-    "hosts/common/features/mullvad-vpn.nix"
-    "hosts/common/features/hyprland.nix"
-  ]);
+      "hosts/common/features/home-manager.nix"
+      "hosts/common/features/mullvad-vpn.nix"
+      "hosts/common/features/hyprland.nix"
+      "hosts/common/features/gaming"
+    ])
+
+    ./hardware-configuration.nix
+  ];
 
   hostSpec = {
     hostName = "asrock";

@@ -24,18 +24,23 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hardware.url = "github:nixos/nixos-hardware";
   };
 
   outputs = {self, nixpkgs, ...}@inputs: let
     inherit (self) outputs;
     inherit (nixpkgs) lib;
-    mkHost = host: {
+    mkHost = host: system: {
       ${host} = lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/nixos/${host}
+        inherit system;
+        modules = let
+          platform = if system == "x86_64-linux" then "nixos" else system;
+        in [
+          ./hosts/${platform}/${host}
           inputs.disko.nixosModules.disko
-          ./hosts/nixos/${host}/disk.nix
+          ./hosts/${platform}/${host}/disk.nix
+          ./hosts/${platform}/${host}/hardware-configuration.nix
         ];
         specialArgs = {
           inherit
@@ -47,12 +52,15 @@
         };
       };
     };
-    mkHostConfigs = hosts: lib.foldl (acc: built: acc // built) {} (lib.map (host: mkHost host) hosts);
+    mkHostConfigs = hosts: system: lib.foldl (acc: built: acc // built) {} (lib.map (host: mkHost host system) hosts);
     readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
   in {
     overlays = import ./overlays {};
 
-    nixosConfigurations = mkHostConfigs (readHosts "nixos");
+    nixosConfigurations = 
+      (mkHostConfigs (readHosts "nixos") "x86_64-linux")
+      // (mkHost "teemo" "aarch64")
+    ;
 
     devShells.x86_64-linux.default = let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;

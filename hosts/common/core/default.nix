@@ -14,6 +14,7 @@
     ./pipewire.nix
     ./sops.nix
     ./thunar.nix
+    ./home-manager.nix
   ];
 
   nix.settings = {
@@ -26,10 +27,10 @@
     outputs.overlays.default
   ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkDefault true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/efi";
-  boot.initrd.systemd.enable = true;
+  boot.initrd.systemd.enable = lib.mkDefault true;
 
   users.mutableUsers = false;
   users.users.root.hashedPassword = "!";

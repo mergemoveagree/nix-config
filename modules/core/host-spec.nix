@@ -69,6 +69,11 @@
     };
     enableZsh = mkEnableOption "ZSH features for primary user";
     doGaming = mkEnableOption "gaming features";
+    isServer = mkOption {
+      type = types.bool;
+      description = "Whether the host is a server.";
+      default = false;
+    };
     gamemodeSettings = mkOption {
       type = types.nullOr submodule {
         gpu_device = mkOption {
@@ -87,6 +92,7 @@
     monitors = mkOption {
       type = types.listOf monitor;
       description = "The monitors used by the host";
+      default = [];
     };
   };
 
@@ -96,8 +102,8 @@
       (let
         primaries = catAttrs "portName" (filter (a: a.primary) config.hostSpec.monitors);
       in {
-        assertion = length primaries == 1;
-        message = "Must have exactly one primary monitor, but found "
+        assertion = length primaries == 1 || config.hostSpec.isServer;
+        message = "Must have exactly one primary monitor for non-server hosts, but found "
           + toString (length primaries) + optionalString (length primaries > 1)
           (", namely " + concatStringSep ", " primaries);
       })

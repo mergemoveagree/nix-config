@@ -50,7 +50,7 @@
     mkHostConfigs = hosts: lib.foldl (acc: built: acc // built) {} (lib.map (host: mkHost host) hosts);
     readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
   in {
-    overlays = import ./overlays { inherit inputs; };
+    overlays = import ./overlays {};
 
     nixosConfigurations = mkHostConfigs (readHosts "nixos");
 

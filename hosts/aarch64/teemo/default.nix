@@ -37,4 +37,8 @@
       interface = "eno0";
     };
   };
+
+  users.users.user.openssh.authorizedKeys.keys = [
+    (builtins.readFile ./authorized_keys/user.pub)
+  ];
 }

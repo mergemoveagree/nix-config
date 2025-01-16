@@ -8,7 +8,7 @@
     module = ./config;
   };
 in {
-  imports = [ inputs.nixvim.homeMangerModules.nixvim ];
+  imports = [ inputs.nixvim.homeManagerModules.nixvim ];
 
   home.packages = [
     nvim

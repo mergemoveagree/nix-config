@@ -3,8 +3,11 @@
 , hostSpec
 , ...
 }: {
-  imports = map lib.custom.relativeToRoot [
-    "modules/core/host-spec.nix"
+  imports = lib.custom.scanPaths ./. 
+  ++ lib.flatten [
+    (map lib.custom.relativeToRoot [
+      "modules/core/host-spec.nix"
+    ])
   ];
 
   inherit hostSpec;

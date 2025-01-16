@@ -34,7 +34,7 @@
     };
     defaultGateway = {
       address = "192.168.1.254";
-      interface = "ens3";
+      interface = "eno0";
     };
   };
 }

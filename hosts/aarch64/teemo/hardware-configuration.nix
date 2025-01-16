@@ -1,10 +1,5 @@
 {
-  boot = {
-    initrd = {
-      availableKernelModules = ["xhci_pci"];
-    };
-    loader.timeout = 5;
-  };
+  boot.initrd.availableKernelModules = ["xhci_pci"];
 
   hardware.raspberry-pi."4" = {
     i2c1.enable = true;

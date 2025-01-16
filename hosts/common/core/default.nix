@@ -1,5 +1,6 @@
 { lib
 , outputs
+, pkgs
 , ...
 }: {
   imports = lib.flatten [
@@ -34,6 +35,10 @@
 
   users.mutableUsers = false;
   users.users.root.hashedPassword = "!";
+
+  # Enabling smart card support
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.pcscd.enable = true;
 
   system.stateVersion = "24.05";
 }

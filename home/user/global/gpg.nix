@@ -2,9 +2,6 @@
 , config
 , ...
 }: {
-  services.udev.packages = [ pkgs.yubikey-personalization ];
-  services.pcscd.enable = true;
-
   programs.gpg = {
     enable = true;
     mutableKeys = true;

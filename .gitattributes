@@ -1,2 +1,4 @@
 home/user/features/thunderbird-aliases.json filter=git-crypt diff=git-crypt
 home/user/global/mail.nix filter=git-crypt diff=git-crypt
+hosts/aarch64/teemo/teemo_initrd_ed25519_key filter=git-crypt diff=git-crypt
+hosts/aarch64/teemo/teemo_initrd_rsa_key filter=git-crypt diff=git-crypt

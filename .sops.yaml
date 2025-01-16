@@ -6,7 +6,7 @@ keys:
     - &teemo age180avs6dn88g46rahrt7gapdkqf4xvyy6fydnkgt74qrgkvhltsdqhda4v0
 creation_rules:
   # General secrets for all users
-  - path_reges: home/secrets.yml$
+  - path_regex: home/secrets.yml$
     key_groups:
       - pgp:
         - *user

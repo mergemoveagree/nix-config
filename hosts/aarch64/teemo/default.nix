@@ -41,4 +41,25 @@
   users.users.user.openssh.authorizedKeys.keys = [
     (builtins.readFile ./authorized_keys/user.pub)
   ];
+
+  boot.initrd.availableKernelModules = [ "virtio-pci" ];
+
+  boot.initrd.network = {
+    enable = true;
+    ssh = {
+      enable = true;
+      port = 2222;
+      hostKeys = [
+        ./teemo_initrd_ed25519_key
+        ./teemo_initrd_rsa_key
+      ];
+      authorizedKeyFiles = [
+        ./authorized_keys/user.pub
+      ];
+    };
+    postCommands = ''
+      echo 'cryptsetup-askpass' >> /root/.profile
+    '';
+  };
+  boot.kernelParams = [ "ip=192.168.1.3::192.168.1.254::teemo::none" ];
 }

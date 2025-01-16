@@ -2,6 +2,8 @@
 keys:
   - &users:
     - &user 0581367C097C635BF5839E57282872FA4AF162DE
+  - &homes:
+    - &user_home age1fqgqugs3xk430tleutumc6ppk3l26expcszhhn4l0d3p7erf2ses5neg2j
   - &hosts:
     - &teemo age180avs6dn88g46rahrt7gapdkqf4xvyy6fydnkgt74qrgkvhltsdqhda4v0
 creation_rules:
@@ -17,3 +19,5 @@ creation_rules:
     key_groups:
       - pgp:
         - *user
+        age:
+        - *user_home

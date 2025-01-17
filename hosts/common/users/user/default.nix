@@ -7,7 +7,7 @@
   sops.secrets = {
     "user_password" = {
       neededForUsers = true;
-      sopsFile = lib.custom.relativeToRoot "home/user/secrets.yml";
+      sopsFile = lib.custom.relativeToRoot "home/secrets.yml";
     };
   };
 

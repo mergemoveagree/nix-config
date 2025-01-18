@@ -37,8 +37,8 @@ in {
         refreshRate = 144;
         alignOffsetX = -1920;
         alignOffsetY = 360;
-        wallpaper = relRoot "wallpapers/rags.jpg";
-        lockscreen = relRoot "wallpapers/hsr.jpg"; 
+        wallpaper = relRoot "wallpapers/terraria.jpg";
+        lockscreen = relRoot "wallpapers/skyrim.jpg"; 
       }
     ];
     enableZsh = true;

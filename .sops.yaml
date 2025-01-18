@@ -6,6 +6,7 @@ keys:
     - &user_home age1fqgqugs3xk430tleutumc6ppk3l26expcszhhn4l0d3p7erf2ses5neg2j
   - &hosts:
     - &teemo age180avs6dn88g46rahrt7gapdkqf4xvyy6fydnkgt74qrgkvhltsdqhda4v0
+    - &thinkpadx1 age1pxh8cfm2c5kr3hlsvkperfnzs73kemn3fr64c0cavvghnh68jpfsgck4ks
 creation_rules:
   # General secrets for all users
   - path_regex: home/secrets.yml$
@@ -14,6 +15,7 @@ creation_rules:
         - *user
         age:
         - *teemo
+        - *thinkpadx1
   # Personal secrets for primary user
   - path_regex: home/user/secrets.yml$
     key_groups:

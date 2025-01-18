@@ -36,5 +36,7 @@
   services.udev.packages = [ pkgs.yubikey-personalization ];
   services.pcscd.enable = true;
 
+  services.power-profiles-daemon.enable = true;
+
   system.stateVersion = "24.05";
 }

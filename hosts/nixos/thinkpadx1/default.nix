@@ -28,7 +28,7 @@
       {
         portName = "eDP-1";
         width = 1920;
-        height = 1080;
+        height = 1200;
         refreshRate = 60;
         wallpaper = lib.custom.relativeToRoot "wallpapers/orv.png";
         lockscreen = lib.custom.relativeToRoot "wallpapers/orv1.png"; 

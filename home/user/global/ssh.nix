@@ -20,6 +20,13 @@
         user = "user";
         port = 2222;
       };
+
+      "gh-mma" = {
+        hostname = "github.com";
+        user = "git";
+        identitiesOnly = true;
+        identityFile = config.sops.secrets."ssh_github_private_key".path;
+      };
     };
   };
 }

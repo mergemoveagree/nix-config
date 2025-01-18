@@ -1,8 +1,13 @@
 { pkgs
 , ...
 }: {
+  home.packages = with pkgs; [
+    zeitgeist
+    plocate
+  ];
+
   xdg.configFile."xfce4/helpers.rc".text = ''
-    TerminalEmulator=${pkgs.kitty}/bin/kitty -1
+    TerminalEmulator=${pkgs.kitty}/bin/kitty
   '';
 
   xdg.configFile."Thunar/uca.xml".text = ''
@@ -25,7 +30,7 @@
       <name>Search with Catfish</name>
       <submenu></submenu>
       <unique-id>1737237387060213-1</unique-id>
-      <command>catfish --path=%f</command>
+      <command>${pkgs.xfce.catfish}/bin/catfish --path=%f</command>
       <description>Search recursively through selected directories</description>
       <range></range>
       <patterns>*</patterns>

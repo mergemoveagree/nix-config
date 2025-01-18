@@ -19,7 +19,7 @@ in {
 
   hostSpec = {
     hostName = "asrock";
-    netInterface = "wlan0";
+    netInterface = "enp6s0";
     monitors = [
       {
         portName = "DP-1";

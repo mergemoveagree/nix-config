@@ -14,7 +14,7 @@
   users.users.user = {
     name = "user";
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "input" ];
+    extraGroups = [ "networkmanager" "input" ] ++ lib.optional config.hostSpec.doGaming "gamemode";
     hashedPasswordFile = config.sops.secrets."user_password".path;
   } // lib.optionalAttrs config.hostSpec.enableZsh {
     shell = pkgs.zsh;

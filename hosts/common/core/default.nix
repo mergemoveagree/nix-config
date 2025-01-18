@@ -1,21 +1,15 @@
 { lib
 , outputs
 , pkgs
+, config
 , ...
 }: {
-  imports = lib.flatten [
+  imports = lib.custom.scanPaths ./.
+  ++ lib.flatten [
     (map lib.custom.relativeToRoot [
       "modules/core"
       "hosts/common/users/admin"
     ])
-    ./linux-hardening
-    ./chrony.nix
-    ./networking.nix
-    ./openssh.nix
-    ./pipewire.nix
-    ./sops.nix
-    ./thunar.nix
-    ./home-manager.nix
   ];
 
   nix.settings = {
@@ -27,6 +21,8 @@
   nixpkgs.overlays = [
     outputs.overlays.default
   ];
+
+  networking.hostName = config.hostSpec.hostName;
 
   boot.loader.systemd-boot.enable = lib.mkDefault true;
   boot.loader.efi.canTouchEfiVariables = true;

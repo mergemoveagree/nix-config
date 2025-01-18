@@ -6,5 +6,6 @@
 
   home.packages = with pkgs; [
     mullvad-browser
+    wl-clipboard-rs
   ];
 }

@@ -8,8 +8,14 @@
 
   programs.mpv = {
     enable = true;
-    package = pkgs.mpv-unwrapped.override {
-      waylandSupport = true;
+    package = pkgs.mpv-unwrapped.wrapper {
+      mpv = pkgs.mpv-unwrapped.override {
+        waylandSupport = true;
+        pipewireSupport = true;
+      };
+      scripts = with pkgs.mpvScripts; [
+        mpris
+      ];
     };
     bindings = {
       "CTRL+1" = "no-osd change-list glsl-shaders set \"${pkgs.anime4k}/Anime4K_Clamp_Highlights.glsl:${pkgs.anime4k}/Anime4K_Restore_CNN_VL.glsl:${pkgs.anime4k}/Anime4K_Upscale_CNN_x2_VL.glsl:${pkgs.anime4k}/Anime4K_AutoDownscalePre_x2.glsl:${pkgs.anime4k}/Anime4K_AutoDownscalePre_x4.glsl:${pkgs.anime4k}/Anime4K_Upscale_CNN_x2_M.glsl\"; show-text \"Anime4K: Mode A (HQ)\"";
@@ -23,8 +29,5 @@
     config = {
       glsl-shaders = "${pkgs.anime4k}/Anime4K_Clamp_Highlights.glsl:${pkgs.anime4k}/Anime4K_Restore_CNN_VL.glsl:${pkgs.anime4k}/Anime4K_Upscale_CNN_x2_VL.glsl:${pkgs.anime4k}/Anime4K_AutoDownscalePre_x2.glsl:${pkgs.anime4k}/Anime4K_AutoDownscalePre_x4.glsl:${pkgs.anime4k}/Anime4K_Upscale_CNN_x2_M.glsl";
     };
-    scripts = with pkgs; [
-      mpvScripts.mpris
-    ];
   };
 }

@@ -8,7 +8,7 @@
 
     "$terminal" = "${pkgs.kitty}/bin/kitty -1";
     "$fileManager" = "${pkgs.xfce.thunar}/bin/thunar";
-    "$menu" = "${pkgs.rofi-wayland} -show drun";
+    "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
 
     exec-once = [
       "${pkgs.mako}/bin/mako"

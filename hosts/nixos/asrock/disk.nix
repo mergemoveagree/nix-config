@@ -2,7 +2,7 @@
   disko.devices.disk = {
     "0" = {
       type = "disk";
-      device = "/dev/disk/by-id/nvme-CT2000P5PSSD8_23133F7360CC-part1";
+      device = "/dev/nvme0n1";
       content = {
         type = "gpt";
         partitions = {
@@ -32,7 +32,7 @@
     };
     "1" = {
       type = "disk";
-      device = "/dev/disk/by-id/nvme-WD_BLACK_SN770_2TB_24193M807673-part1";
+      device = "/dev/nvme1n1";
       content = {
         type = "gpt";
         partitions = {

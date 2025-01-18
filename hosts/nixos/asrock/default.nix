@@ -1,9 +1,13 @@
 { lib
+, inputs
 , ...
 }: let
   relRoot = lib.custom.relativeToRoot;
 in {
   imports = lib.flatten [
+    inputs.hardware.nixosModules.common-cpu-intel-cpu-only
+    inputs.hardware.nixosModules.common-gpu-amd
+
     (map lib.custom.relativeToRoot [
       "hosts/common/core"
       

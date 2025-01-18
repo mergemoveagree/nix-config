@@ -3,6 +3,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,6 +46,11 @@
           inputs.disko.nixosModules.disko
           ./hosts/${platform}/${host}/disk.nix
           ./hosts/${platform}/${host}/hardware-configuration.nix
+          {
+            nixpkgs.overlays = [
+              inputs.nur.overlays.default
+            ];
+          }
         ];
         specialArgs = {
           inherit

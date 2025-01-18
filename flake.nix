@@ -81,6 +81,7 @@
         git-crypt
         sops
         gnupg
+        just
         age
         ssh-to-age
         pcsclite

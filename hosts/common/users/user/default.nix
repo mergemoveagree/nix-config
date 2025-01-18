@@ -22,6 +22,10 @@
 
   programs.zsh.enable = config.hostSpec.enableZsh;
 
+  environment.systemPackages = with pkgs; [
+    just
+  ];
+
 }
 // lib.optionalAttrs (inputs ? "home-manager") {
   home-manager.users.user = import (lib.custom.relativeToRoot "home/user/${config.hostSpec.hostName}.nix");

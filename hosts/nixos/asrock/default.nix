@@ -26,8 +26,8 @@ in {
         width = 3440;
         height = 1440;
         refreshRate = 160;
-        wallpaper = relRoot "wallpapers/sl.jpg";
-        lockscreen = relRoot "wallpapers/hsr2.jpg"; 
+        wallpaper = relRoot "wallpapers/stray.png";
+        lockscreen = relRoot "wallpapers/stray1.png"; 
         primary = true;
       }
       {

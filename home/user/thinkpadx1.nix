@@ -8,6 +8,7 @@
       "home/common/features/media.nix"
       "home/common/features/comms.nix"
       "home/common/features/office.nix"
+      "home/common/features/headset.nix"
     ])
 
     ./global

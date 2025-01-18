@@ -11,7 +11,6 @@
     "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
 
     exec-once = [
-      "${pkgs.mako}/bin/mako"
       "${pkgs.waybar}/bin/waybar"
       "${pkgs.systemd}/bin/systemctl --user import-environment"
       "${pkgs.xfce.thunar}/bin/thunar --daemon"

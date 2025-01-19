@@ -38,5 +38,7 @@
 
   services.power-profiles-daemon.enable = true;
 
+  time.timeZone = "US/Central";
+
   system.stateVersion = "24.05";
 }

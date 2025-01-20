@@ -16,9 +16,8 @@ in {
       "hosts/common/features/mullvad-vpn.nix"
       "hosts/common/features/hyprland.nix"
       "hosts/common/features/gaming"
+      "hosts/common/features/monero.nix"
     ])
-
-    ./hardware-configuration.nix
   ];
 
   hostSpec = {

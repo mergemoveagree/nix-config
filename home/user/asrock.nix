@@ -1,5 +1,4 @@
 { lib
-, pkgs
 , ...
 }: {
   imports = lib.flatten [
@@ -15,10 +14,6 @@
     ./global
     ./features/comms.nix
     ./features/thunderbird.nix
-  ];
-
-  home.packages = with pkgs; [
-    monero-gui
   ];
 
   services.easyeffects.preset = "Perfect EQ";

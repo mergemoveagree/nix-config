@@ -10,6 +10,10 @@
   programs.zsh = lib.optionalAttrs config.hostSpec.enableZsh {
     enable = true;
     syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
+    shellAliases = {
+      cd = "z ";
+    };
     plugins = [
       {
         # TODO: Any way to do this without constantly changing the hashes?

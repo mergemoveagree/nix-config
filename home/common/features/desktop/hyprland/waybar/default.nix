@@ -38,7 +38,7 @@ in {
       passthrough = false;
       reload_style_on_change = true;
 
-      modules-left = [ "custom/ws" "custom/left1" "hyprland/workspaces" "custom/right1" "custom/spacer" "mpris" ];
+      modules-left = [ "custom/smallspacer" "custom/ws" "custom/left1" "hyprland/workspaces" "custom/right1" "custom/spacer" "mpris" ];
       modules-center = ["custom/padd" "custom/l_end" "custom/r_end" "hyprland/window" "custom/padd"];
       modules-right = ["custom/padd" "custom/l_end" "group/expand" "network" "group/expand-3" "group/expand-2" "idle_inhibitor" "memory" "cpu" "power-profiles-daemon" "custom/cputemp" "clock" "custom/notification" "custom/padd"];
 

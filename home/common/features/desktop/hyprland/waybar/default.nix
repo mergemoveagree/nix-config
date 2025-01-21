@@ -1,4 +1,6 @@
 { pkgs
+, lib
+, config
 , ...
 }: let
   cpu-temp-script = pkgs.substituteAll {
@@ -24,6 +26,7 @@ in {
     enable = true;
     style = ./style.css;
     settings.mainBar = {
+      # Based on https://github.com/Anik200/dotfiles/tree/super-waybar
       layer = "top";
       position = "top";
       mode = "dock";
@@ -35,9 +38,26 @@ in {
       passthrough = false;
       reload_style_on_change = true;
 
-      modules-left = [ "custom/smallspacer" "hyprland/workspaces" "custom/spacer" "mpris" ];
+      modules-left = [ "custom/ws" "custom/left1" "hyprland/workspaces" "custom/right1" "custom/spacer" "mpris" ];
       modules-center = ["custom/padd" "custom/l_end" "custom/r_end" "hyprland/window" "custom/padd"];
       modules-right = ["custom/padd" "custom/l_end" "group/expand" "network" "group/expand-3" "group/expand-2" "idle_inhibitor" "memory" "cpu" "power-profiles-daemon" "custom/cputemp" "clock" "custom/notification" "custom/padd"];
+
+      "custom/ws" = {
+        format = " ";
+        tooltip = false;
+        min-length = 3;
+        max-length = 3;
+      };
+
+      "custom/right1" = {
+        format = "";
+        tooltip = false;
+      };
+
+      "custom/left1" = {
+        format = "";
+        tooltip = false;
+      };
 
       power-profiles-daemon = {
         format = " {icon} ";
@@ -143,11 +163,11 @@ in {
       "custom/spacer".format = "|";
 
       "hyprland/workspaces" = {
-        format = "{icon}";
-        format-icons = {
-          default = " ";
-	        active = " ";
+        persistent-workspaces = {
+          "${(lib.lists.findFirst ({ primary, ... }: primary) null config.hostSpec.monitors).portName}" = [ 1 ];
         };
+        on-scroll-up = "hyprctl dispatch workspace +1";
+        on-scroll-down = "hyprctl dispatch workspace -1";
       };
 
       idle_inhibitor = {

@@ -153,11 +153,23 @@ in {
       };
 
       "hyprland/window" = {  
-        #format = "{}";  # Default value
-        format = "<span  weight='bold' >{class}</span>";
+        format = "{}";
         max-length = 120;
         icon = false;
         icon-size = 13;
+        rewrite = {
+          "~" = "  Terminal";
+          zsh = "  Terminal";
+          kitty = "  Terminal";
+          "(.*)Mozilla Firefox" = "<span foreground='#f38ba8'>󰈹 </span> Firefox";
+          "(.*) — Mozilla Firefox" = "<span foreground='#f38ba8'>󰈹 </span> $1";
+          vesktop = "<span foreground='#89b4fa'> </span> Discord";
+          "• Discord(.*)" = "Discord$1";
+          "(.*)Discord(.*)" = "<span foreground='#89b4fa'> </span> $1Discord$2";
+          "(.*).jpg" = "  $1.jpg";
+          "(.*).png" = "  $1.png";
+          "(.*).svg" = "  $1.svg";
+        };
       };
 
       "custom/spacer".format = "|";

@@ -174,13 +174,14 @@ tooltip {
   font-weight: normal;
   font-size: 20px;
   color: #915CAF;
-  margin: 0;
-  padding: 7px 0 0 0;
+  padding: 0;
+  margin: 8px 0 0 0;
 }
 
 #power-profiles-daemon {
+  padding: 0;
   margin: 0;
-  padding-bottom: 3px;
+  font-size: 20px;
 }
 
 #power-profiles-daemon.performance {
@@ -199,8 +200,8 @@ tooltip {
   font-weight: normal;
   font-size: 20px;
   color: #E4C9AF;
-  margin: 0;
-  padding: 7px 0 0 10px;
+  padding: 0;
+  margin: 8px 0 0 8px;
 }
 
 #custom-cputemp {
@@ -245,6 +246,10 @@ tooltip {
 #window {
   color: #A1BDCE;
   font-family: "Martian Mono";
+}
+
+#tray {
+  padding-right: 8px;
 }
 
 #custom-l_end,

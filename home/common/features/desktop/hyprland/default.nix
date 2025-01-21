@@ -13,6 +13,8 @@
     };
   };
 
+  services.swaync.enable = true;
+
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.systemd.enable = true;
   wayland.windowManager.hyprland.xwayland.enable = true;

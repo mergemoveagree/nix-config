@@ -1,5 +1,6 @@
 { lib
 , inputs
+, pkgs
 , ...
 }: let
   relRoot = lib.custom.relativeToRoot;
@@ -51,4 +52,12 @@ in {
       amd_performance_level = "auto";
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    clinfo
+  ];
+
+  hardware.graphics.extraPackages = with pkgs; [
+    rocmPackages.clr.icd
+  ];
 }

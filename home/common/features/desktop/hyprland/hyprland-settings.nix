@@ -22,8 +22,7 @@
       "EDITOR,nvim"
       "XDG_CURRENT_DESKTOP,Hyprland"
       "XDG_SESSION_TYPE,wayland"
-      "XDG_SESSION_DESKTOP,Hyprland"
-    ];
+      "XDG_SESSION_DESKTOP,Hyprland" ];
 
     xwayland = {
       force_zero_scaling = true;
@@ -131,6 +130,10 @@
       )
       10)
     );
+
+    bindl = [
+      "$mod, Z, dpms, toggle"
+    ];
 
     bindm = [
       "$mod, mouse:272, movewindow"

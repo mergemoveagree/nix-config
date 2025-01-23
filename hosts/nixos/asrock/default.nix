@@ -69,4 +69,8 @@ in {
     enable = true;
     wantedBy = ["multi-user.target"];
   };
+
+  boot.kernelParams = [
+    "amdgpu.ppfeaturemask=0xfff7ffff"
+  ];
 }

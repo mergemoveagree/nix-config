@@ -55,13 +55,11 @@ in {
 
   environment.systemPackages = with pkgs; [
     clinfo
-    opencl-headers
     lact
   ];
 
   hardware.graphics.extraPackages = with pkgs; [
     rocmPackages.clr.icd
-    ocl-icd
   ];
 
   systemd.packages = with pkgs; [ lact ];

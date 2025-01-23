@@ -18,9 +18,7 @@
     warn-dirty = false;
   };
 
-  nixpkgs.overlays = [
-    outputs.overlays.default
-  ];
+  nixpkgs.overlays = builtins.attrValues outputs.overlays;
 
   networking.hostName = config.hostSpec.hostName;
 

@@ -2,6 +2,7 @@
   description = "mergemoveagree's NixOS configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     nur = {
       url = "github:nix-community/NUR";
@@ -65,7 +66,7 @@
     mkHostConfigs = hosts: system: lib.foldl (acc: built: acc // built) {} (lib.map (host: mkHost host system) hosts);
     readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
   in {
-    overlays = import ./overlays {};
+    overlays = import ./overlays { inherit inputs; };
 
     nixosConfigurations = 
       (mkHostConfigs (readHosts "nixos") "x86_64-linux")

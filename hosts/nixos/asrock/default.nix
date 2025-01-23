@@ -72,7 +72,8 @@ in {
   ];
 
   hardware.graphics.extraPackages = with pkgs; [
-    rocmPackages.clr.icd
+    #rocmPackages.clr.icd
+    stable.rocmPackages.clr.icd
   ];
 
   systemd.packages = with pkgs; [ lact ];

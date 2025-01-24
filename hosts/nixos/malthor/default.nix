@@ -15,6 +15,7 @@
       "hosts/common/users/elmo"
 
       "hosts/common/features/sops.nix"
+      "hosts/common/features/home-manager.nix"
       "hosts/common/features/hyprland.nix"
       "hosts/common/features/gaming"
     ])

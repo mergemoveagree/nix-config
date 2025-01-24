@@ -40,7 +40,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYIe+a9svbtfP/ebUBVMBnwMA/C7+zIMa4PTtrkIf4x"
   ];
 
-  boot.initrd.availableKernelModules = [ "virtio-pci" ];
+  boot.initrd.availableKernelModules = [ "virtio-pci" "genet" ];
 
   boot.initrd.network = {
     enable = true;

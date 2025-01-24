@@ -9,7 +9,7 @@
     ];
     loader = {
       grub.enable = false;
-      generic-extlinux-compatible.enable = true;
+      generic-extlinux-compatible.enable = false;
     };
     kernelParams = [ "kunit.enable=0" ];
   };

@@ -22,9 +22,6 @@
     isServer = true;
   };
 
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.initrd.systemd.enable = lib.mkForce false;
-
   networking = {
     interfaces.eno0 = {
       ipv4.addresses = [{

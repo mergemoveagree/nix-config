@@ -1,4 +1,5 @@
 { lib
+, config
 , ...
 }: {
   imports = lib.flatten [
@@ -17,13 +18,13 @@
 
   hostSpec = {
     hostName = "teemo";
-    netInterface = "eno0";
+    netInterface = "enabcm6e4ei0";
     enableZsh = true;
     isServer = true;
   };
 
   networking = {
-    interfaces.eno0 = {
+    interfaces.${config.hostSpec.netInterface} = {
       ipv4.addresses = [{
         address = "192.168.1.3";
         prefixLength = 24;
@@ -31,7 +32,7 @@
     };
     defaultGateway = {
       address = "192.168.1.254";
-      interface = "eno0";
+      interface = config.hostSpec.netInterface;
     };
   };
 
@@ -55,5 +56,5 @@
       ];
     };
   };
-  boot.kernelParams = [ "ip=192.168.1.3::::teemo:eth0:none" ];
+  boot.kernelParams = [ "ip=192.168.1.3::::teemo::none" ];
 }

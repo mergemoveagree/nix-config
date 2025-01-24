@@ -37,7 +37,7 @@
   };
 
   users.users.user.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYIe+a9svbtfP/ebUBVMBnwMA/C7+zIMa4PTtrkIf4x"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYIe+a9svbtfP/ebUBVMBnwMA/C7+zIMa4PTtrkIf4x user@asrock"
   ];
 
   boot.initrd.availableKernelModules = [ "virtio-pci" "genet" ];
@@ -52,7 +52,7 @@
         ./teemo_initrd_rsa_key
       ];
       authorizedKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYIe+a9svbtfP/ebUBVMBnwMA/C7+zIMa4PTtrkIf4x"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYIe+a9svbtfP/ebUBVMBnwMA/C7+zIMa4PTtrkIf4x user@asrock"
       ];
     };
   };

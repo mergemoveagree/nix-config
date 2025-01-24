@@ -21,6 +21,7 @@ in {
       "hosts/common/features/hyprland.nix"
       "hosts/common/features/gaming"
       "hosts/common/features/monero.nix"
+      "hosts/common/features/opencl.nix"
     ])
   ];
 
@@ -70,13 +71,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    clinfo
     lact
-  ];
-
-  hardware.graphics.extraPackages = with pkgs; [
-    #rocmPackages.clr.icd
-    stable.rocmPackages.clr.icd
   ];
 
   systemd.packages = with pkgs; [ lact ];

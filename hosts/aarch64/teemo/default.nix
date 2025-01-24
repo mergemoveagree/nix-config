@@ -36,7 +36,7 @@
   };
 
   users.users.user.openssh.authorizedKeys.keys = [
-    (builtins.readFile ./authorized_keys/user.pub)
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYIe+a9svbtfP/ebUBVMBnwMA/C7+zIMa4PTtrkIf4x"
   ];
 
   boot.initrd.availableKernelModules = [ "virtio-pci" ];
@@ -50,13 +50,10 @@
         ./teemo_initrd_ed25519_key
         ./teemo_initrd_rsa_key
       ];
-      authorizedKeyFiles = [
-        ./authorized_keys/user.pub
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYIe+a9svbtfP/ebUBVMBnwMA/C7+zIMa4PTtrkIf4x"
       ];
     };
-    postCommands = ''
-      echo 'cryptsetup-askpass' >> /root/.profile
-    '';
   };
-  boot.kernelParams = [ "ip=192.168.1.3::192.168.1.254::teemo::none" ];
+  boot.kernelParams = [ "ip=192.168.1.3::::teemo:eth0:none" ];
 }

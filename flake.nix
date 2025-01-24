@@ -45,7 +45,7 @@
       ${host} = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = let
-          platform = if system == "x86_64-linux" then "nixos" else system;
+          platform = if system == "x86_64-linux" then "nixos" else nixpkgs.lib.removeSuffix "-linux" system;
         in [
           ./hosts/${platform}/${host}
           inputs.disko.nixosModules.disko
@@ -74,24 +74,29 @@
 
     nixosConfigurations = 
       (mkHostConfigs (readHosts "nixos") "x86_64-linux")
-      // (mkHost "teemo" "aarch64")
+      // (mkHost "teemo" "aarch64-linux")
     ;
 
-    devShells.x86_64-linux.default = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in pkgs.mkShell {
-      NIX_CONFIG = "extra-experimental-features = nix-command flakes";
-      nativeBuildInputs = with pkgs; [
-        git
-        git-crypt
-        sops
-        gnupg
-        just
-        age
-        ssh-to-age
-        pcsclite
-        ccid
-      ];
-    };
+    devShells = nixpkgs.lib.genAttrs [
+      "x86_64-linux"
+      "aarch64-linux"
+    ] (name: let
+      pkgs = nixpkgs.legacyPackages.${name};
+    in {
+      default = pkgs.mkShell {
+        NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+        nativeBuildInputs = with pkgs; [
+          git
+          git-crypt
+          sops
+          gnupg
+          just
+          age
+          ssh-to-age
+          pcsclite
+          ccid
+        ];
+      };
+    });
   };
 }

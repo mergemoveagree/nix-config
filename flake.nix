@@ -41,9 +41,8 @@
 
   outputs = {self, nixpkgs, ...}@inputs: let
     inherit (self) outputs;
-    inherit (nixpkgs) lib;
     mkHost = host: system: {
-      ${host} = lib.nixosSystem {
+      ${host} = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = let
           platform = if system == "x86_64-linux" then "nixos" else system;
@@ -68,8 +67,8 @@
         };
       };
     };
-    mkHostConfigs = hosts: system: lib.foldl (acc: built: acc // built) {} (lib.map (host: mkHost host system) hosts);
-    readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
+    mkHostConfigs = hosts: system: nixpkgs.lib.foldl (acc: built: acc // built) {} (nixpkgs.lib.map (host: mkHost host system) hosts);
+    readHosts = folder: nixpkgs.lib.attrNames (builtins.readDir ./hosts/${folder});
   in {
     overlays = import ./overlays { inherit inputs; };
 

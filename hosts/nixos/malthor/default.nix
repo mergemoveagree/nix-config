@@ -27,8 +27,9 @@
         portName = "eDP-1";
         width = 1920;
         height = 1080;
+        refreshRate = 60;
         wallpaper = lib.custom.relativeToRoot "wallpapers/er2.png";
-        lockscreen = lib.custom.relativeToRoot "wallpapers/er1.png";
+        lockscreen = lib.custom.relativeToRoot "wallpapers/er1.jpg";
         primary = true;
       }
     ];

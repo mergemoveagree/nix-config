@@ -29,5 +29,5 @@
 
 }
 // lib.optionalAttrs (inputs ? "home-manager") {
-  home-manager.users.user = import (lib.custom.relativeToRoot "home/elmo/${config.hostSpec.hostName}.nix");
+  home-manager.users.elmo = import (lib.custom.relativeToRoot "home/elmo/${config.hostSpec.hostName}.nix");
 }

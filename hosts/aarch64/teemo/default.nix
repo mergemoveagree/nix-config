@@ -9,6 +9,8 @@
       "hosts/common/core"
 
       "hosts/common/users/user"
+
+      "hosts/common/features/sops.nix"
     ])
 
     ./unbound.nix

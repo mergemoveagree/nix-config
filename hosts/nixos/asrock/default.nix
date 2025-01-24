@@ -14,6 +14,7 @@ in {
       
       "hosts/common/users/user"
       
+      "hosts/common/features/sops.nix"
       "hosts/common/features/secure-boot.nix"
       "hosts/common/features/mullvad-vpn.nix"
       "hosts/common/features/hyprland.nix"

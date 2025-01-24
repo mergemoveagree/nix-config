@@ -1,9 +1,21 @@
 {
-  boot.initrd.availableKernelModules = ["xhci_pci"];
-
-  hardware.raspberry-pi."4" = {
-    i2c1.enable = true;
-    fkms-3d.enable = true;
+  boot = {
+    initrd.availableKernelModules = [
+      "usbhid"
+      "usb_storage"
+      "vc4"
+      "pcie_brcmstb"
+      "reset-raspberrypi"
+    ];
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+    kernelParams = [ "kunit.enable=0" ];
+  };
+  hardware = {
+    deviceTree.filter = "bcm2711-rpi-4*.dtb";
+    enableRedistributableFirmware = true;
   };
 
   nixpkgs.hostPlatform.system = "aarch64-linux";

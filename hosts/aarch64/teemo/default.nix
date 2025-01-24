@@ -1,10 +1,7 @@
-{ inputs
-, lib
+{ lib
 , ...
 }: {
   imports = lib.flatten [
-    inputs.hardware.nixosModules.raspberry-pi-4
-
     (map lib.custom.relativeToRoot [
       "hosts/common/core"
 

@@ -63,6 +63,11 @@
     };
     profiles.main = {
       isDefault = true;
+      search = {
+        default = "DuckDuckGo";
+        privateDefault = "DuckDuckGo";
+        force = true;
+      };
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         addy_io
         bitwarden

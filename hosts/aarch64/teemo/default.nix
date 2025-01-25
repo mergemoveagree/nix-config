@@ -40,7 +40,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHNRvHW+ueHG+Gpd/uWr1PTQ9gSZ+z9K1LsrprEMQPO2 user@asrock"
   ];
 
-  boot.initrd.availableKernelModules = [ "virtio-pci" "genet" ];
+  boot.initrd.availableKernelModules = [ "genet" ];
 
   boot.initrd.network = {
     enable = true;
@@ -54,7 +54,9 @@
       authorizedKeys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHNRvHW+ueHG+Gpd/uWr1PTQ9gSZ+z9K1LsrprEMQPO2 user@asrock"
       ];
+      shell = lib.mkIf (!config.boot.initrd.systemd.enable) "/bin/cryptsetup-askpass";
     };
   };
   boot.kernelParams = [ "ip=192.168.1.3::::teemo::none" ];
+  boot.initrd.systemd.users.root.shell = lib.mkIf (config.boot.initrd.systemd.enable) "/bin/systemd-tty-ask-password-agent";
 }

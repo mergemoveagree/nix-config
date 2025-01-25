@@ -3,7 +3,7 @@
 }: {
   services.unbound = {
     enable = true;
-    enableRootTrustAnchor = true;
+    enableRootTrustAnchor = false;
     resolveLocalQueries = true;
     settings = {
       server = {

@@ -14,7 +14,7 @@
 
     ./global
     ./features/comms.nix
-    ./features/thunderbird.nix
+    ./features/mail-client.nix
   ];
 
   home.packages = with pkgs; [

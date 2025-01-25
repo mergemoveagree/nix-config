@@ -13,7 +13,7 @@
 
     ./global
     ./features/comms.nix
-    ./features/thunderbird.nix
+    ./features/mail-client.nix
   ];
 
   services.easyeffects.preset = "Loudness+Autogain";

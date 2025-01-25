@@ -1,12 +1,12 @@
 {
   services.adguardhome = {
     enable = true;
-    allowDHCP = false;
     host = "127.0.0.1";
     port = 3003;
     mutableSettings = false;
     openFirewall = true;
     settings = {
+      dhcp = true;
       dns = {
         bind_hosts = [
           "127.0.0.1"

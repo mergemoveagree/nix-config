@@ -1,4 +1,6 @@
-{
+{ pkgs
+, ...
+}: {
   services.unbound = {
     enable = true;
     enableRootTrustAnchor = true;
@@ -8,6 +10,8 @@
         interface = [ "127.0.0.1" ];
         port = 5335;
         access-control = [ "127.0.0.1 allow" ];
+        root-hints = "${pkgs.dns-root-data}/root.hints";
+        trust-anchor-file = "${pkgs.dns-root-data}/root.key";
         # Based on recommended settings in https://docs.pi-hole.net/guides/dns/unbound/#configure-unbound
         harden-glue = true;
         harden-dnssec-stripped = true;

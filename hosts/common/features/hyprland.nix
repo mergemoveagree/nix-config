@@ -33,4 +33,8 @@ in {
 
   environment.systemPackages = [ pkgs.kitty ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Setting up keyring for secrets
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.hyprland-gnome-keyring.enableGnomeKeyring = true;
 }

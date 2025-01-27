@@ -24,12 +24,13 @@ in {
   };
 
   # Since this config is on nixpkgs-unstable, this shouldn't be needed, but just in case...
-  system.replaceDependencies.replacements = [
-    { oldDependency = pkgs.mesa; newDependency = hyprland-nixpkgs.mesa; }
-  ] ++
-  lib.optionals config.hostSpec.doGaming [
-    { oldDependency = inputs.nixpkgs.legacyPackages.${pkgs.system}.pkgsi686Linux.mesa; newDependency = hyprland-nixpkgs.pkgsi686Linux.mesa; }
-  ];
+  system.replaceDependencies.replacements = let
+    hyprlandMesa = hyprland-nixpkgs.mesa;
+    hyprlandMesa32 = hyprland-nixpkgs.pkgsi686Linux.mesa;
+    nixpkgsMesa32 = inputs.nixpkgs.legacyPackages.${pkgs.system}.pkgsi686Linux.mesa;
+  in 
+  lib.optional (pkgs.mesa != hyprlandMesa) { oldDependency = pkgs.mesa; newDependency = hyprlandMesa; }
+  ++ lib.optional (config.hostSpec.doGaming && nixpkgsMesa32 != hyprlandMesa32) { oldDependency = nixpkgsMesa32; newDependency = hyprlandMesa32; };
 
   environment.systemPackages = [ pkgs.kitty ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";

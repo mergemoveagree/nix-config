@@ -40,6 +40,7 @@
           description = "The y-offset for the monitor relative to other monitors";
           default = 0;
         };
+        hdr = mkEnableOption "HDR features";
         wallpaper = mkOption {
           type = types.path;
           description = "The wallpaper to display on the monitor";

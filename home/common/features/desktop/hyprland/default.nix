@@ -1,6 +1,7 @@
 { lib
 , config
 , pkgs
+, inputs
 , ...
 }: {
   imports = lib.custom.scanPaths ./.;
@@ -15,9 +16,12 @@
 
   services.swaync.enable = true;
 
-  wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.systemd.enable = true;
-  wayland.windowManager.hyprland.xwayland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    systemd.enable = true;
+    xwayland.enable = true;
+  };
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [

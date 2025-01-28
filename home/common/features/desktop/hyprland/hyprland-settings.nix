@@ -130,6 +130,11 @@
       )
       10)
     );
+    
+    bindd = lib.optionals (lib.any ({ hdr, ... }: hdr) config.hostSpec.monitors) [
+      "$mod, O, Deactivate HDR Mode, exec, hyprctl keyword experimental:hdr false"
+      "$mod, P, Activate HDR Mode, exec, hyprctl keyword experimental:hdr true"
+    ];
 
     bindl = [
       "$mod, Z, dpms, toggle"

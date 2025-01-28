@@ -37,6 +37,7 @@ in {
         wallpaper = relRoot "wallpapers/stray.png";
         lockscreen = relRoot "wallpapers/stray1.png"; 
         primary = true;
+        hdr = true;
       }
       {
         portName = "DP-2";

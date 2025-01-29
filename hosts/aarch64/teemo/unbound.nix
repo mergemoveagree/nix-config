@@ -19,7 +19,7 @@
   services.unbound = {
     enable = true;
     enableRootTrustAnchor = false;
-    resolveLocalQueries = true;
+    resolveLocalQueries = false;
     settings = {
       server = {
         interface = [ "127.0.0.1" ];
@@ -39,4 +39,9 @@
       };
     };
   };
+
+  networking.nameservers = [
+    "127.0.0.1"
+    "::1"
+  ];
 }

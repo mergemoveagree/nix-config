@@ -60,4 +60,9 @@
   };
   boot.kernelParams = [ "ip=192.168.1.3::::teemo::none" ];
   boot.initrd.systemd.users.root.shell = lib.mkIf (config.boot.initrd.systemd.enable) "/bin/systemd-tty-ask-password-agent";
+
+  # Quad9 DNS for local resolutions
+  networking.nameservers = [
+    "9.9.9.9"
+  ];
 }

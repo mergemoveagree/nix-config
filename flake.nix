@@ -67,15 +67,15 @@
         };
       };
     };
-    mkHostConfigs = hosts: system: nixpkgs.lib.foldl (acc: built: acc // built) {} (nixpkgs.lib.map (host: mkHost host system) hosts);
-    readHosts = folder: nixpkgs.lib.attrNames (builtins.readDir ./hosts/${folder});
   in {
     overlays = import ./overlays { inherit inputs; };
 
-    nixosConfigurations = 
-      (mkHostConfigs (readHosts "nixos") "x86_64-linux")
-      // (mkHost "teemo" "aarch64-linux")
-    ;
+    nixosConfigurations = nixpkgs.lib.mergeAttrsList [
+      (mkHost "asrock" "x86_64-linux")
+      (mkHost "thinkpadx1" "x86_64-linux")
+      (mkHost "malthor" "x86_64-linux")
+      (mkHost "teemo" "aarch64-linux")
+    ];
 
     devShells = nixpkgs.lib.genAttrs [
       "x86_64-linux"

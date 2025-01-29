@@ -25,3 +25,10 @@ creation_rules:
         - *user
         age:
         - *user_home
+  # Secrets for the teemo host
+  - path_regex: hosts/aarch64/teemo/secrets.yml$
+    key_groups:
+      - pgp:
+        - *user
+        age:
+        - *teemo

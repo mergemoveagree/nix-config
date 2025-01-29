@@ -37,6 +37,11 @@
     };
   };
 
+  sops.secrets = {
+    "teemo_initrd_ed25519_private_key".sopsFile = lib.custom.relativeToRoot "hosts/aarch64/teemo/secrets.yml";
+    "teemo_initrd_rsa_private_key".sopsFile = lib.custom.relativeToRoot "hosts/aarch64/teemo/secrets.yml";
+  };
+
   users.users.user.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHNRvHW+ueHG+Gpd/uWr1PTQ9gSZ+z9K1LsrprEMQPO2 user@asrock"
   ];
@@ -49,8 +54,8 @@
       enable = true;
       port = 2222;
       hostKeys = [
-        ./teemo_initrd_ed25519_key
-        ./teemo_initrd_rsa_key
+        config.sops.secrets."teemo_initrd_ed25519_private_key".path
+        config.sops.secrets."teemo_initrd_rsa_private_key".path
       ];
       authorizedKeys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHNRvHW+ueHG+Gpd/uWr1PTQ9gSZ+z9K1LsrprEMQPO2 user@asrock"

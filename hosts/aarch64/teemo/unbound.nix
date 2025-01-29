@@ -14,6 +14,11 @@
       group = "unbound";
       mode = "0644";
     };
+    "resolv.conf".text = ''
+      nameserver 127.0.0.1
+      nameserver ::1
+      options edns0
+    '';
   };
 
   services.unbound = {
@@ -39,9 +44,4 @@
       };
     };
   };
-
-  networking.nameservers = [
-    "127.0.0.1"
-    "::1"
-  ];
 }

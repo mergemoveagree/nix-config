@@ -95,6 +95,11 @@
       description = "The monitors used by the host";
       default = [];
     };
+    hasRTC = mkOption {
+      type = types.bool;
+      description = "Whether the host has an RTC";
+      default = true;
+    };
   };
 
   # Ensure that only one monitor is primary

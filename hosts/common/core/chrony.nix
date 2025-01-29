@@ -1,8 +1,11 @@
-{
+{ lib
+, config
+, ...
+}: {
   services.chrony = {
     enable = true;
     enableNTS = true;
-    enableRTCTrimming = true;
+    enableRTCTrimming = config.hostSpec.hasRTC;
     servers = [
       "ohio.time.system76.com"
       "oregon.time.system76.com"
@@ -12,8 +15,6 @@
       "time.txryan.com"
     ];
     serverOption = "iburst";
-    extraConfig = ''
-      cmdport 0
-    '';
+    extraFlags = lib.optional (! config.hostSpec.hasRTC) "-s";
   };
 }

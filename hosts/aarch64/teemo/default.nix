@@ -21,6 +21,7 @@
     netInterface = "enabcm6e4ei0";
     enableZsh = true;
     isServer = true;
+    hasRTC = false;
   };
 
   networking = {

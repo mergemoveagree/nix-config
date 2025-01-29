@@ -6,7 +6,7 @@
     mutableSettings = false;
     openFirewall = true;
     settings = {
-      dhcp = true;
+      dhcp.enabled = true;
       dns = {
         bind_hosts = [
           "127.0.0.1"
@@ -25,6 +25,7 @@
           enabled = false;
         };
       };
+      # Unbound will do DNSSEC already
       enable_dnssec = false;
 
       # The following notation uses map

@@ -1,4 +1,6 @@
-{
+{ config
+, ...
+}: {
   services.adguardhome = {
     enable = true;
     host = "127.0.0.1";
@@ -6,7 +8,15 @@
     mutableSettings = false;
     openFirewall = true;
     settings = {
-      dhcp.enabled = true;
+      dhcp = {
+        enabled = true;
+        interface_name = config.hostSpec.netInterface;
+        dhcpv4 = {
+          gateway_ip = "192.168.1.254";
+          range_start = "192.168.1.64";
+          range_end = "192.168.1.253";
+        };
+      };
       dns = {
         bind_hosts = [
           "127.0.0.1"

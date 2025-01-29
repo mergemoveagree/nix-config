@@ -13,6 +13,7 @@
         interface_name = config.hostSpec.netInterface;
         dhcpv4 = {
           gateway_ip = "192.168.1.254";
+          subnet_mask = "255.255.255.0";
           range_start = "192.168.1.64";
           range_end = "192.168.1.253";
         };

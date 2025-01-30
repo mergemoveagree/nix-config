@@ -100,6 +100,11 @@
       description = "Whether the host has an RTC";
       default = true;
     };
+    portable = mkOption {
+      type = types.bool;
+      description = "Whether the host is portable (e.g., has a battery)";
+      default = false;
+    };
   };
 
   # Ensure that only one monitor is primary

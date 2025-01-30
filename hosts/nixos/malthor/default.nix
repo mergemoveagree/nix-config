@@ -37,6 +37,7 @@
     ];
     enableZsh = true;
     doGaming = true;
+    portable = true;
   };
 
   boot.extraModprobeConfig = ''

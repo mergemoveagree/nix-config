@@ -38,6 +38,7 @@
       }
     ];
     enableZsh = true;
+    portable = true;
   };
 
   hardware.graphics.extraPackages = with pkgs; [

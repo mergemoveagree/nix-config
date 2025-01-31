@@ -22,7 +22,7 @@
     enable = true;
     virtualHosts = {
       "jaden0.com" = {
-        onlySSL = true;
+        forceSSL = true;
         enableACME = true;
         locations = {
           "/aghome" = {
@@ -36,5 +36,9 @@
         };
       };
     };
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [ 443 80 ];
   };
 }

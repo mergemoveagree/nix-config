@@ -9,7 +9,6 @@
     certs = {
       "jaden0.com" = {
         dnsProvider = "njalla";
-        domain = "*.jaden0.com";
         group = "nginx";
         environmentFile = config.sops.secrets."njalla_acme_content".path;
         # Have to set to null or else default is non-null

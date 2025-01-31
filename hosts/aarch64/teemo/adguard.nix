@@ -42,6 +42,10 @@
           enabled = false;
         };
       };
+      tls = {
+        enabled = true;
+        server_name = "jaden.rs";
+      };
       # Unbound will do DNSSEC already
       enable_dnssec = false;
 

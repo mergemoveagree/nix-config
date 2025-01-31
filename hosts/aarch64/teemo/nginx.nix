@@ -28,8 +28,6 @@
           "/aghome" = {
             proxyPass = "http://127.0.0.1:3003";
             extraConfig = ''
-              proxy_cookie_path / /aghome/;
-              proxy_redirect / /aghome/;
               proxy_set_header Host $host;
               proxy_set_header X-Real-IP $remote_addr;
               proxy_set_header X-Forwarded-Host $host;

@@ -1,6 +1,5 @@
 { lib
 , outputs
-, pkgs
 , config
 , ...
 }: {
@@ -12,27 +11,9 @@
     ])
   ];
 
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    auto-optimise-store = true;
-    warn-dirty = false;
-  };
-
   nixpkgs.overlays = builtins.attrValues outputs.overlays;
 
   networking.hostName = config.hostSpec.hostName;
-
-  boot.loader.systemd-boot.enable = lib.mkDefault true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/efi";
-  boot.initrd.systemd.enable = lib.mkDefault true;
-
-  users.mutableUsers = false;
-  users.users.root.hashedPassword = "!";
-
-  # Enabling smart card support
-  services.udev.packages = [ pkgs.yubikey-personalization ];
-  services.pcscd.enable = true;
 
   time.timeZone = "US/Central";
 

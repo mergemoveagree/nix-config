@@ -12,8 +12,9 @@
       "hosts/common/features/home-manager.nix"
     ])
 
-    ./unbound.nix
     ./adguard.nix
+    ./nginx.nix
+    ./unbound.nix
   ];
 
   hostSpec = {

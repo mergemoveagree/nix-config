@@ -14,6 +14,7 @@
 
     ./global
     ./features/comms.nix
+    ./features/heroic.nix
     ./features/mail-client.nix
   ];
 

@@ -8,6 +8,12 @@
     mutableSettings = false;
     openFirewall = true;
     settings = {
+      users = [
+        {
+          name = "admin";
+          password = "$2a$20$cN/kcfAQkfbyglz.Eqh2ceVqRR8.NKG7thK/8BGX.OsRjQinP9q3S";
+        }
+      ];
       dhcp = {
         enabled = true;
         interface_name = config.hostSpec.netInterface;

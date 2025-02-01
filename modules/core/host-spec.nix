@@ -1,7 +1,9 @@
 { lib
 , config
 , ...
-}: with lib; {
+}: with lib; let
+  cfg = config.hostSpec;
+in {
   options.hostSpec = let
     monitor = types.submodule {
       options = {
@@ -76,18 +78,18 @@
       default = false;
     };
     gamemodeSettings = mkOption {
-      type = types.nullOr submodule {
+      type = types.nullOr (types.submodule {
         gpu_device = mkOption {
-          types = types.nullOr types.int.unsigned;
+          type = types.nullOr types.int.unsigned;
           description = "The index of the GPU device on the host";
           default = null;
         };
         amd_performance_level = mkOption {
-          types = types.nullOr types.str;
+          type = types.nullOr types.str;
           description = "The performance mode of the AMD GPU";
           default = null;
         };
-      };
+      });
       default = null;
     };
     monitors = mkOption {
@@ -105,15 +107,16 @@
       description = "Whether the host is portable (e.g., has a battery)";
       default = false;
     };
+    enableHomeManager = mkEnableOption "home-manager for users" // { default = true; };
   };
 
   # Ensure that only one monitor is primary
-  config = mkIf (config.hostSpec.monitors != { }) {
+  config = mkIf (cfg.monitors != { }) {
     assertions = [
       (let
-        primaries = catAttrs "portName" (filter (a: a.primary) config.hostSpec.monitors);
+        primaries = catAttrs "portName" (filter (a: a.primary) cfg.monitors);
       in {
-        assertion = length primaries == 1 || config.hostSpec.isServer;
+        assertion = length primaries == 1 || cfg.isServer;
         message = "Must have exactly one primary monitor for non-server hosts, but found "
           + toString (length primaries) + optionalString (length primaries > 1)
           (", namely " + concatStringSep ", " primaries);

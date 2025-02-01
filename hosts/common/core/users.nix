@@ -35,8 +35,3 @@
     just
   ];
 }
-// lib.optionalAttrs (inputs ? "home-manager") {
-  home-manager.users = lib.foldlAttrs (_: name: _: {
-    ${name} = import (lib.custom.relativeToRoot "home/${name}/${config.hostSpec.hostName}.nix");
-  }) {} config.userSpec;
-}

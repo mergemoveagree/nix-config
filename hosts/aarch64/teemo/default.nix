@@ -9,7 +9,6 @@
       "hosts/common/users/user"
 
       "hosts/common/features/sops.nix"
-      "hosts/common/features/home-manager.nix"
     ])
 
     ./adguard.nix

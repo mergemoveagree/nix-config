@@ -75,6 +75,7 @@
       (mkHost "thinkpadx1" "x86_64-linux")
       (mkHost "malthor" "x86_64-linux")
       (mkHost "teemo" "aarch64-linux")
+      (mkHost "hyeonseong" "x86_64-linux")
     ];
 
     devShells = nixpkgs.lib.genAttrs [

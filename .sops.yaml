@@ -8,6 +8,7 @@ keys:
     - &teemo age180avs6dn88g46rahrt7gapdkqf4xvyy6fydnkgt74qrgkvhltsdqhda4v0
     - &thinkpadx1 age1pxh8cfm2c5kr3hlsvkperfnzs73kemn3fr64c0cavvghnh68jpfsgck4ks
     - &asrock age1jgfvjm4l78e8gg0e3k29xy74dtutegayy0wzeeqk2jvtt6mahsqq6p7uy7
+    - &malthor age1hcqsre7g46mu2209guwru95c7rnwzd0f2s3n2tqu4hr8dcrvj3pq4a7c9g
 creation_rules:
   # General secrets for all hosts
   - path_regex: hosts/secrets.yml$
@@ -18,16 +19,17 @@ creation_rules:
         - *teemo
         - *thinkpadx1
         - *asrock
+        - *malthor
   # General secrets for all users
   - path_regex: home/secrets.yml$
     key_groups:
       - pgp:
         - *user
-      # TODO: Use user age key instead 
         age:
         - *teemo
         - *thinkpadx1
         - *asrock
+        - *malthor
   # Personal secrets for primary user
   - path_regex: home/user/secrets.yml$
     key_groups:

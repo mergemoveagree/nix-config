@@ -139,7 +139,7 @@ in {
     ];
 
     bindl = [
-      "$mod, Z, dpms, toggle"
+      "$mod, Z, exec, sleep 1 && hyprctl dispatch dpms toggle"
     ];
 
     bindm = [

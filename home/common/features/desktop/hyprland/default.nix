@@ -24,6 +24,15 @@
     xwayland.enable = true;
   };
 
+  # Create hyprland.desktop with correct Exec
+  xdg.desktopEntries.hyprland = {
+    name = "Hyprland";
+    comment = "An intelligent dynamic tiliing Wayland compositor";
+    exec = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/Hyprland";
+    type = "Application";
+    settings.Keywords = "tiling;wayland;compositor;";
+  };
+
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     kdePackages.ark

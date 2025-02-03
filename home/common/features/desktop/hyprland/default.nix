@@ -19,7 +19,8 @@
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    systemd.enable = true;
+    # Set to false for UWSM integration
+    systemd.enable = false;
     xwayland.enable = true;
   };
 

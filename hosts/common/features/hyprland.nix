@@ -21,6 +21,7 @@ in {
     enable = true;
     package = hyprland-pkgs.hyprland;
     portalPackage = hyprland-pkgs.xdg-desktop-portal-hyprland;
+    withUWSM = true;
   };
 
   # Since this config is on nixpkgs-unstable, this shouldn't be needed, but just in case...

@@ -16,6 +16,7 @@ in {
       "${uwsm} ${pkgs.waybar}/bin/waybar"
       "${uwsm} ${pkgs.xfce.thunar}/bin/thunar --daemon"
       "${uwsm} ${pkgs.networkmanagerapplet}/bin/nm-applet"
+      "systemctl --user enable --now hyprpaper.service"
     ];
 
     env = [

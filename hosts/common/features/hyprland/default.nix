@@ -7,6 +7,8 @@
   hyprland-pkgs = inputs.hyprland.packages.${pkgs.system};
   hyprland-nixpkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
 in {
+  imports = lib.custom.scanPaths ./.;
+
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];

@@ -15,7 +15,7 @@
       "hosts/common/users/elmo"
 
       "hosts/common/features/sops.nix"
-      "hosts/common/features/hyprland.nix"
+      "hosts/common/features/hyprland"
       "hosts/common/features/gaming"
     ])
   ];

@@ -17,7 +17,7 @@ in {
       "hosts/common/features/sops.nix"
       "hosts/common/features/secure-boot.nix"
       "hosts/common/features/mullvad-vpn.nix"
-      "hosts/common/features/hyprland.nix"
+      "hosts/common/features/hyprland"
       "hosts/common/features/gaming"
       "hosts/common/features/monero.nix"
       "hosts/common/features/opencl.nix"

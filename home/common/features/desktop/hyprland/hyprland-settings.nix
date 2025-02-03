@@ -2,19 +2,20 @@
 , lib
 , config
 , ...
-}: {
+}: let
+  uwsm = "/run/current-system/sw/bin/uwsm app --";
+in {
   wayland.windowManager.hyprland.settings = {
     monitor = map (monitor: with monitor; "${portName},${toString width}x${toString height}@${toString refreshRate},${toString alignOffsetX}x${toString alignOffsetY},${toString scale}") config.hostSpec.monitors;
 
     "$terminal" = "${pkgs.kitty}/bin/kitty -1";
     "$fileManager" = "${pkgs.xfce.thunar}/bin/thunar";
-    "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun";
+    "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun -run-command \"${uwsm} {cmd}\"";
 
     exec-once = [
-      "${pkgs.waybar}/bin/waybar"
-      "${pkgs.systemd}/bin/systemctl --user import-environment"
-      "${pkgs.xfce.thunar}/bin/thunar --daemon"
-      "${pkgs.networkmanagerapplet}/bin/nm-applet"
+      "${uwsm} ${pkgs.waybar}/bin/waybar"
+      "${uwsm} ${pkgs.xfce.thunar}/bin/thunar --daemon"
+      "${uwsm} ${pkgs.networkmanagerapplet}/bin/nm-applet"
     ];
 
     env = [

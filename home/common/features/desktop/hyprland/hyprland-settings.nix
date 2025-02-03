@@ -8,8 +8,8 @@ in {
   wayland.windowManager.hyprland.settings = {
     monitor = map (monitor: with monitor; "${portName},${toString width}x${toString height}@${toString refreshRate},${toString alignOffsetX}x${toString alignOffsetY},${toString scale}") config.hostSpec.monitors;
 
-    "$terminal" = "${pkgs.kitty}/bin/kitty -1";
-    "$fileManager" = "${pkgs.xfce.thunar}/bin/thunar";
+    "$terminal" = "${uwsm} ${pkgs.kitty}/bin/kitty -1";
+    "$fileManager" = "${uwsm} ${pkgs.xfce.thunar}/bin/thunar";
     "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun -run-command \"${uwsm} {cmd}\"";
 
     exec-once = [

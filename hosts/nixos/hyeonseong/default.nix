@@ -22,6 +22,7 @@
   };
 
   networking = {
+    useDHCP = false;
     interfaces.${config.hostSpec.netInterface} = {
       ipv4.addresses = [{
         address = "185.141.216.3";
@@ -31,7 +32,9 @@
     defaultGateway = {
       address = "185.141.216.1";
       interface = config.hostSpec.netInterface;
+      metric = 100;
     };
+    nameservers = [ "9.9.9.9" ];
   };
 
   users.users.user.openssh.authorizedKeys.keys = [

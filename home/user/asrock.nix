@@ -13,6 +13,7 @@
     ])
 
     ./global
+    ./features/apps.nix
     ./features/comms.nix
     ./features/heroic.nix
     ./features/mail-client.nix

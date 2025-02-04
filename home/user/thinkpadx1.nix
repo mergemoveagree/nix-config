@@ -12,6 +12,7 @@
     ])
 
     ./global
+    ./features/apps.nix
     ./features/comms.nix
     ./features/mail-client.nix
   ];

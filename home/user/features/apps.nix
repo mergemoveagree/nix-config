@@ -2,7 +2,6 @@
 , ...
 }: {
   home.packages = with pkgs; [
-    element-desktop
-    vesktop
+    tor-browser
   ];
 }

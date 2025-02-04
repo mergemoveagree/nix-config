@@ -33,4 +33,13 @@
       interface = config.hostSpec.netInterface;
     };
   };
+
+  # Legacy boot
+  boot.loader = {
+    systemd-boot.enable = lib.mkForce false;
+    efi.efiSysMountPoint = lib.mkForce "/boot/efi";
+    grub = {
+      enable = true;
+    };
+  };
 }

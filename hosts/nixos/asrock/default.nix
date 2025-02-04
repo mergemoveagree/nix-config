@@ -83,4 +83,11 @@ in {
   boot.kernelParams = [
     "amdgpu.ppfeaturemask=0xfff7ffff"
   ];
+
+  # FIXME: Remove once eddie is bumped to dotnet 8
+  nixpkgs.config.permittedInsecurePackages = [
+    "dotnet-sdk-6.0.428"
+    "dotnet-runtime-6.0.36"
+  ];
+
 }

@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [
     monero-gui
+    eddie
   ];
 
   services.easyeffects.preset = "Perfect EQ";

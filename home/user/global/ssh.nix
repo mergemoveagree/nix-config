@@ -1,7 +1,10 @@
 { config
 , ...
 }: {
-  sops.secrets."ssh_user_teemo_access_private_key".sopsFile = ../secrets.yml;
+  sops.secrets = {
+    "ssh_user_teemo_access_private_key".sopsFile = ../secrets.yml;
+    "ssh_user_hyeonseong_access_private_key".sopsFile = ../secrets.yml;
+  };
 
   programs.ssh = {
     enable = true;
@@ -19,6 +22,13 @@
         identityFile = config.sops.secrets."ssh_user_teemo_access_private_key".path;
         user = "root";
         port = 2222;
+      };
+
+      "hyeonseong" = {
+        hostname = "185.141.216.3";
+        identitiesOnly = true;
+        identityFile = config.sops.secrets."ssh_user_hyeonseong_access_private_key".path;
+        user = "user";
       };
 
       "gh-mma" = {

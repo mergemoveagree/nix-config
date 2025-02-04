@@ -35,7 +35,10 @@ in {
   lib.optional (pkgs.mesa != hyprlandMesa) { oldDependency = pkgs.mesa; newDependency = hyprlandMesa; }
   ++ lib.optional (config.hostSpec.doGaming && nixpkgsMesa32 != hyprlandMesa32) { oldDependency = nixpkgsMesa32; newDependency = hyprlandMesa32; };
 
-  environment.systemPackages = [ pkgs.kitty ];
+  environment.systemPackages = with pkgs; [
+    kitty
+    hyprpolkitagent
+  ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Setting up keyring for secrets

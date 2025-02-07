@@ -14,6 +14,7 @@
     ./adguard.nix
     ./nginx.nix
     ./unbound.nix
+    ./duckdns.nix
   ];
 
   hostSpec = {

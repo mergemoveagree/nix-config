@@ -1,4 +1,6 @@
-{
+{ lib
+, ...
+}: {
   services.openssh = {
     enable = true;
     ports = [ 22 ];
@@ -6,7 +8,7 @@
       PasswordAuthentication = true;
       UseDns = true;
       X11Forwarding = false;
-      PermitRootLogin = "no";
+      PermitRootLogin = lib.mkDefault "no";
     };
 
     hostKeys = [

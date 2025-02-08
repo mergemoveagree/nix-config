@@ -33,4 +33,7 @@
       config.sops.secrets."matrix-synapse_extra_config".path
     ];
   };
+
+  # Open port for federation
+  networking.firewall.allowedTCPPorts = [ 8448 ];
 }

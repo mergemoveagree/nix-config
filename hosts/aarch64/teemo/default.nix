@@ -11,6 +11,7 @@
       "hosts/common/features/sops.nix"
     ])
 
+    ./matrix-synapse
     ./adguard.nix
     ./nginx.nix
     ./unbound.nix

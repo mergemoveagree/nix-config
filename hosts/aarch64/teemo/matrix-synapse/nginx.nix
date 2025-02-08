@@ -1,4 +1,6 @@
-let
+{ pkgs
+, ...
+}: let
   fqdn = "matrix.leftrmodule.com";
   baseUrl = "https://${fqdn}";
   clientConfig."m.homeserver".base_url = baseUrl;
@@ -28,6 +30,16 @@ in {
         '';
         "/_matrix".proxyPass = "http://[::1]:8008";
         "._synapse/client".proxyPass = "http://[::1]:8008";
+      };
+    };
+    "element.leftrmodule.com" = {
+      enableACME = true;
+      forceSSL = true;
+      serverAliases = [
+        "element.${fqdn}"
+      ];
+      root = pkgs.element-web.override {
+        conf.default_server_config = clientConfig;
       };
     };
   };

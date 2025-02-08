@@ -1,9 +1,7 @@
 { config
-, lib
 , ...
 }: {
-  sops.secrets."njalla_acme_content".sopsFile = lib.custom.relativeToRoot "hosts/secrets.yml";
-
+  # FIXME: Will fail without networking secrets
   security.acme = {
     acceptTerms = true;
     defaults.email = "uiazagzv@addy.io";

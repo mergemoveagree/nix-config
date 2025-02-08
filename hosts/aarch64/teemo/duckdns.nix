@@ -11,11 +11,6 @@
     fi
   '';
 in {
-  sops.secrets = {
-    "duckdns_domain".sopsFile = ./secrets.yml;
-    "duckdns_token".sopsFile = ./secrets.yml;
-  };
-
   services.cron = {
     enable = true;
     systemCronJobs = [

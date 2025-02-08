@@ -5,7 +5,7 @@
   duckdns-update-script = pkgs.writeScript "duckdns-update" ''
     DOMAIN="$(cat ${config.sops.secrets."duckdns_domain".path})"
     TOKEN="$(cat ${config.sops.secrets."duckdns_token".path})"
-    response="$(echo url='https://www.duckdns.org/update?domains=''${DOMAIN}&token=''${TOKEN}&ip=' | ${pkgs.curl}/bin/curl -skK -)"
+    response="$(echo url="https://www.duckdns.org/update?domains=''${DOMAIN}&token=''${TOKEN}&ip=" | ${pkgs.curl}/bin/curl -skK -)"
     if [ "$response" != "OK" ]; then
       exit 1
     fi

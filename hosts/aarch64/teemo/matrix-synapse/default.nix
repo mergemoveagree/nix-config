@@ -6,7 +6,10 @@
     ./postgresql.nix
   ];
 
-  sops.secrets."matrix-synapse_extra_config".sopsFile = ../secrets.yml;
+  sops.secrets."matrix-synapse_extra_config" = {
+    owner = "matrix-synapse";
+    sopsFile = ../secrets.yml;
+  };
 
   services.matrix-synapse = {
     enable = true;

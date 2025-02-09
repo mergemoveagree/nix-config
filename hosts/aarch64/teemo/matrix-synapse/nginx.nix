@@ -12,9 +12,11 @@
   '';
 in {
   # WARN: Must open ports 80 and 443 somewhere else
+  # WARN: Must set up certificates through ACME service
   services.nginx.virtualHosts = {
     "leftrmodule.com" = {
       enableACME = true;
+      acmeRoot = null;
       forceSSL = true;
       locations = {
         "= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
@@ -24,6 +26,7 @@ in {
     "${fqdn}" = {
       enableACME = true;
       forceSSL = true;
+      acmeRoot = null;
       locations = {
         "/".extraConfig = ''
           return 404;
@@ -34,6 +37,7 @@ in {
     };
     "element.leftrmodule.com" = {
       enableACME = true;
+      acmeRoot = null;
       forceSSL = true;
       serverAliases = [
         "element.${fqdn}"

@@ -4,8 +4,8 @@
   sops.secrets = {
     "ssh_user_teemo_access_private_key".sopsFile = ../secrets.yml;
     "ssh_user_teemo_update_private_key".sopsFile = ../secrets.yml;
-    "ssh_user_hyeonseong_access_private_key".sopsfile = ../secrets.yml;
-    "ssh_user_hyeonseong_update_private_key".sopsfile = ../secrets.yml;
+    "ssh_user_hyeonseong_access_private_key".sopsFile = ../secrets.yml;
+    "ssh_user_hyeonseong_update_private_key".sopsFile = ../secrets.yml;
   };
 
   programs.ssh = {

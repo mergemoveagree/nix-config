@@ -49,9 +49,16 @@
     nameservers = [ "9.9.9.9" ];
   };
 
-  users.users.user.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICOlK3pu/w0HL9QKUJl8eMGZA7sWfK+PZyJ/MygaorEK "
-  ];
+  services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
+
+  users.users = {
+    root.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK9QLV5cgHgjnbQsDWvjRfawrqFJn0u860YLgnAxyILd "
+    ];
+    user.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICOlK3pu/w0HL9QKUJl8eMGZA7sWfK+PZyJ/MygaorEK "
+    ];
+  };
 
   # Legacy boot
   boot.loader = {

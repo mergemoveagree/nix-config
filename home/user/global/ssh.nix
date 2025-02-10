@@ -33,7 +33,7 @@
       };
 
       "hyeonseong" = {
-        hostname = "185.141.216.3";
+        hostname = "65.87.7.200";
         identitiesOnly = true;
         identityFile = config.sops.secrets."ssh_user_hyeonseong_access_private_key".path;
         user = "user";

@@ -36,6 +36,10 @@
                   mountpoint = "/nix";
                   mountOptions = [ "compress-force=zstd" "space_cache=v2" "noatime" ];
                 };
+                "/@swap" = {
+                  mountpoint = "/swap";
+                  swap.swapfile.size = "4G";
+                };
               };
             };
           };

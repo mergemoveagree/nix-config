@@ -40,14 +40,6 @@ creation_rules:
         - *user
         age:
         - *user_home
-  # Secrets for networking across hosts
-  - path_regex: hosts/networking_secrets.yml$
-    key_groups:
-      - pgp: 
-        - *user
-        age:
-        - *teemo
-        - *hyeonseong
   # Secrets for the teemo host
   - path_regex: hosts/aarch64/teemo/secrets.yml$
     key_groups:
@@ -55,3 +47,10 @@ creation_rules:
         - *user
         age:
         - *teemo
+  # Secrets for the hyeonseong host
+  - path_regex: hosts/nixos/hyeonseong/secrets.yml$
+    key_groups:
+      - pgp:
+        - *user
+        age:
+        - *hyeonseong

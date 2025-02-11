@@ -15,7 +15,7 @@
     ./adguard.nix
     ./nginx.nix
     ./unbound.nix
-    ./duckdns.nix
+    ./njalla-ddns.nix
   ];
 
   hostSpec = {
@@ -36,6 +36,35 @@
     defaultGateway = {
       address = "192.168.1.254";
       interface = config.hostSpec.netInterface;
+    };
+    nftables.tables = {
+      firewall = {
+        family = "inet";
+        content = ''
+          chain inbound_ipv4 {
+            icmp type echo-request limit rate 5/second accept
+          }
+
+          chain inbound_ipv6 {
+            icmpv6 type { nd-neighbor-solicit, nd-router-advert, nd-neighbor-advert } accept
+          }
+
+          chain inbound {
+            type filter hook input priority 0;
+            policy drop;
+            ct state invalid counter drop comment "early drop of invalid packets"
+            ct state {established, related} counter accept comment "accept all connections related to connections made by us"
+            iifname lo accept comment "accept loopback"
+            iif != lo ip daddr 127.0.0.1/8 counter drop comment "drop connections to loopback not coming from loopback"
+            iif != lo ip6 daddr ::1/128 counter drop comment "drop connections to loopback not coming from loopback"
+            ip protocol icmp counter accept comment "accept all ICMP types"
+            meta l4proto ipv6-icmp counter accept comment "accept all ICMP types"
+            tcp dport 22 counter accept comment "accept SSH"
+            ip saddr 65.87.7.200/24 tcp dport { 80, 443 } accept comment "accept connections to 65.87.7.200"
+            counter comment "count dropped packets"
+          }
+        '';
+      };
     };
   };
 

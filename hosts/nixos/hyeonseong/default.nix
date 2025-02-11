@@ -11,6 +11,7 @@
       "hosts/common/features/sops.nix"
     ])
 
+    ./acme.nix
     ./nginx.nix
   ];
 
@@ -46,7 +47,7 @@
       interface = config.hostSpec.netInterface;
     };
     search = [ "us.kyun.network" ];
-    nameservers = [ "9.9.9.9" ];
+    nameservers = [ "8.8.8.8" "8.8.4.4" ];
   };
 
   services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";

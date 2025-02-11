@@ -34,6 +34,15 @@ in {
       root = pkgs.element-web.override {
         conf.default_server_config = clientConfig;
       };
+      locations."/".extraConfig = ''
+        add_header Cache-Control "no-cache";
+      '';
+      extraConfig = ''
+        add_header X-Frame-Options SAMEORIGIN;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-XSS-Protection "1; mode=block";
+        add_header Content-Security-Policy "frame-ancestors 'none'";
+      '';
     };
   };
 }

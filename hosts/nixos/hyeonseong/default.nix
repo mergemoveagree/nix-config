@@ -9,6 +9,8 @@
       "hosts/common/users/user"
 
       "hosts/common/features/sops.nix"
+
+      "modules/features/wg-server.nix"
     ])
 
     ./acme.nix
@@ -20,6 +22,18 @@
     netInterface = "ens18";
     isServer = true;
     enableHomeManager = false;
+  };
+
+  custom-wg-server = {
+    enable = true;
+    forwardedPorts =  map (port: { address = "10.100.0.2"; inherit port; }) [ 
+      80
+      443
+      8008
+    ];
+    peerPublicKeys = [
+      "/9lZDE4gfTvsA5iZGlNux3oxYUX520uQqXguDtGJhCU="
+    ];
   };
 
   services.qemuGuest.enable = true;

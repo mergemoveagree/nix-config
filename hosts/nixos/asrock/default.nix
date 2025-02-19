@@ -90,4 +90,6 @@ in {
     "dotnet-runtime-6.0.36"
   ];
 
+  # Allow cross-compiling for aarch64-linux
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

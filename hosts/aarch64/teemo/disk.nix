@@ -2,7 +2,7 @@
   disko.devices.disk = {
     main = {
       type = "disk";
-      device = "/dev/mmcblk0";
+      device = "/dev/sdb";
       content = {
         type = "gpt";
         partitions = {

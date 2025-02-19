@@ -1,14 +1,19 @@
 { lib
 , config
+, inputs
 , ...
 }: {
   imports = lib.flatten [
+    inputs.hardware.nixosModules.raspberry-pi-4
+
     (map lib.custom.relativeToRoot [
       "hosts/common/core"
 
       "hosts/common/users/user"
 
       "hosts/common/features/sops.nix"
+
+      "modules/features/wg-client.nix"
     ])
 
     ./matrix-synapse
@@ -20,10 +25,20 @@
 
   hostSpec = {
     hostName = "teemo";
-    netInterface = "enabcm6e4ei0";
+    netInterface = "end0";
     enableZsh = true;
     isServer = true;
     hasRTC = false;
+  };
+
+  custom-wg-client = {
+    enable = true;
+    defaultGateway = "192.168.1.254";
+    server = {
+      interfaceIp = "10.100.0.2";
+      endpoint = "65.87.7.200";
+      publicKey = "F12Gr+EGqxNdgB5iUnNrCrrdVwWJKQH6SdZ8gOJO0Q8=";
+    };
   };
 
   networking = {
@@ -37,36 +52,9 @@
       address = "192.168.1.254";
       interface = config.hostSpec.netInterface;
     };
-    nftables.tables = {
-      firewall = {
-        family = "inet";
-        content = ''
-          chain inbound_ipv4 {
-            icmp type echo-request limit rate 5/second accept
-          }
-
-          chain inbound_ipv6 {
-            icmpv6 type { nd-neighbor-solicit, nd-router-advert, nd-neighbor-advert } accept
-          }
-
-          chain inbound {
-            type filter hook input priority 0;
-            policy drop;
-            ct state invalid counter drop comment "early drop of invalid packets"
-            ct state {established, related} counter accept comment "accept all connections related to connections made by us"
-            iifname lo accept comment "accept loopback"
-            iif != lo ip daddr 127.0.0.1/8 counter drop comment "drop connections to loopback not coming from loopback"
-            iif != lo ip6 daddr ::1/128 counter drop comment "drop connections to loopback not coming from loopback"
-            ip protocol icmp counter accept comment "accept all ICMP types"
-            meta l4proto ipv6-icmp counter accept comment "accept all ICMP types"
-            tcp dport 22 counter accept comment "accept SSH"
-            ip saddr 65.87.7.200/24 tcp dport { 80, 443 } accept comment "accept connections to 65.87.7.200"
-            counter comment "count dropped packets"
-          }
-        '';
-      };
-    };
   };
+
+  boot.initrd.systemd.tpm2.enable = false;
 
   sops.secrets = {
     "teemo_initrd_ed25519_private_key".sopsFile = lib.custom.relativeToRoot "hosts/aarch64/teemo/secrets.yml";
@@ -82,10 +70,25 @@
     ];
   };
 
-  services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+    settings.PermitRootLogin = lib.mkForce "prohibit-password";
+  };
 
-  boot.initrd.availableKernelModules = [ "genet" ];
-
+  # initrd SSH
+  boot.kernelParams = [ "ip=192.168.1.3::192.168.1.254:255.255.255.0:teemo::none" ];
+  boot.initrd.availableKernelModules = [
+    "genet"
+    "brcmfmac"
+    "algif_skcipher"
+    "xchacha20"
+    "adiantum"
+    "aes_neon_bs"
+    "sha256"
+    "nhpoly1305"
+    "dm-crypt"
+  ];
   boot.initrd.network = {
     enable = true;
     ssh = {
@@ -101,10 +104,5 @@
       shell = lib.mkIf (!config.boot.initrd.systemd.enable) "/bin/cryptsetup-askpass";
     };
   };
-  boot.kernelParams = [ "ip=192.168.1.3::::teemo::none" ];
-  boot.initrd.systemd.users.root.shell = lib.mkIf (config.boot.initrd.systemd.enable) "/bin/systemd-tty-ask-password-agent";
-
-  environment.etc."resolv.conf".text = ''
-    nameserver 9.9.9.9
-  '';
+  boot.initrd.systemd.users.root.shell = lib.mkIf config.boot.initrd.systemd.enable "/bin/systemd-tty-ask-password-agent"; 
 }

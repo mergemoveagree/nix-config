@@ -1,30 +1,11 @@
-{ pkgs
-, ...
-}: {
-  environment.etc = {
-    "unbound/trusted-key.key" = {
-      source = "${pkgs.dns-root-data}/root.key";
-      user = "unbound";
-      group = "unbound";
-      mode = "0400";
-    };
-    "unbound/root.hints" = {
-      source = "${pkgs.dns-root-data}/root.hints";
-      user = "unbound";
-      group = "unbound";
-      mode = "0644";
-    };
-    "resolv.conf".text = ''
-      nameserver 127.0.0.1
-      nameserver ::1
-      options edns0
-    '';
-  };
+{
+  # Need Quad9 (9.9.9.9) for resolution on boot
+  networking.nameservers = [ "9.9.9.9" ];
 
   services.unbound = {
     enable = true;
-    enableRootTrustAnchor = false;
-    resolveLocalQueries = false;
+    enableRootTrustAnchor = true;
+    resolveLocalQueries = true;
     settings = {
       server = {
         interface = [ "127.0.0.1" ];

@@ -9,10 +9,9 @@
       "hosts/common/users/user"
 
       "hosts/common/features/sops.nix"
-    ])
 
-    ./acme.nix
-    ./nginx.nix
+      "modules/features/wg-server.nix"
+    ])
   ];
 
   hostSpec = {
@@ -22,11 +21,23 @@
     enableHomeManager = false;
   };
 
+  custom-wg-server = {
+    enable = true;
+    forwardedPorts =  map (port: { address = "10.100.0.2"; inherit port; }) [ 
+      80
+      443
+    ];
+    peerPublicKeys = [
+      "/9lZDE4gfTvsA5iZGlNux3oxYUX520uQqXguDtGJhCU="
+    ];
+  };
+
   services.qemuGuest.enable = true;
   systemd.services.macchanger.enable = lib.mkForce false;
 
   networking = {
     useDHCP = false;
+    firewall.allowedTCPPorts = [ 443 80 ];
     interfaces.${config.hostSpec.netInterface} = {
       useDHCP = false;
       ipv4.addresses = [{
@@ -47,7 +58,7 @@
       interface = config.hostSpec.netInterface;
     };
     search = [ "us.kyun.network" ];
-    nameservers = [ "8.8.8.8" "8.8.4.4" ];
+    nameservers = [ "9.9.9.9" "1.1.1.1" "1.0.0.1" ];
   };
 
   services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";

@@ -3,8 +3,10 @@
 , ...
 }: {
   networking = {
-    nftables.enable = true;
-    firewall.enable = true;
+    firewall = {
+      enable = true;
+      allowPing = config.hostSpec.isServer;
+    };
     networkmanager = lib.mkIf (! config.hostSpec.isServer) {
       enable = true;
       wifi.backend = "iwd";

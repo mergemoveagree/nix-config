@@ -2,12 +2,12 @@
 , lib
 , config
 , ...
-}: let
-  interfaceName = config.hostSpec.netInterface;
-in {
+}: {
   environment.etc.machine-id.text = "b08dfa6083e7567a1921a715000001fb";
 
-  systemd.services.macchanger = {
+  systemd.services.macchanger = let
+      interfaceName = config.hostSpec.netInterface;
+  in {
     enable = lib.mkDefault true;
     description = "macchanger on ${interfaceName}";
     wants = [ "network-pre.target" ];
@@ -40,7 +40,7 @@ in {
   boot.kernel.sysctl."net.ipv4.conf.all.send_redirects" = 0;
   boot.kernel.sysctl."net.ipv4.conf.default.send_redirects" = 0;
   boot.kernel.sysctl."net.ipv4.tcp_fin_timeout" = 30;
-  boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_all" = 1;
+  boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_all" = if config.hostSpec.isServer then 0 else 1;
   boot.kernel.sysctl."net.ipv4.conf.all.accept_source_route" = 0;
   boot.kernel.sysctl."net.ipv4.conf.default.accept_source_route" = 0;
   boot.kernel.sysctl."net.ipv6.conf.all.accept_source_route" = 0;
@@ -52,7 +52,7 @@ in {
   boot.kernel.sysctl."net.ipv4.tcp_fack" = 0;
   boot.kernel.sysctl."net.ipv6.conf.all.use_tempaddr" = 2;
   boot.kernel.sysctl."net.ipv6.conf.default.use_tempaddr" = lib.mkForce 2;
-  boot.kernel.sysctl."net.ipv4.ip_forward" = 0;
+  boot.kernel.sysctl."net.ipv4.ip_forward" = lib.mkDefault 0;
   boot.kernel.sysctl."net.ipv4.tcp_keepalive_time" = 180;
   boot.kernel.sysctl."net.ipv4.tcp_keepalive_intvl" = 10;
   boot.kernel.sysctl."net.ipv4.tcp_keepalive_probes" = 3;

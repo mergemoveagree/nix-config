@@ -20,7 +20,9 @@
     ./matrix-synapse
     ./acme.nix
     ./adguard.nix
+    ./fail2ban.nix
     ./nginx.nix
+    ./ntfy.nix
     ./unbound.nix
     ./njalla-ddns.nix
   ];
@@ -46,6 +48,7 @@
 
   hardware.raspberry-pi."4".apply-overlays-dtmerge.enable = true;
   boot.initrd.systemd.tpm2.enable = false;
+  systemd.services.macchanger.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
     dig
@@ -62,7 +65,7 @@
       address = "192.168.1.254";
       interface = config.hostSpec.netInterface;
     };
-    allowedTCPPorts = [ 443 80 ];
+    firewall.allowedTCPPorts = [ 443 80 ];
   };
 
   sops.secrets = {

@@ -19,6 +19,11 @@
         dnsProvider = "njalla";
         environmentFile = config.sops.secrets."njalla_acme_content".path;
       };
+      "ntfy.leftrmodule.com" = {
+        group = "nginx";
+        dnsProvider = "njalla";
+        environmentFile = config.sops.secrets."njalla_acme_content".path;
+      };
     };
   };
 }

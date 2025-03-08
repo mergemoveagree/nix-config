@@ -11,7 +11,7 @@
       sopsFile = mkOption {
         type = types.path;
         description = "The sops file responsible for the user password";
-        default = lib.custom.relativeToRoot "home/secrets.yml";
+        default = lib.custom.relativeToRoot "hosts/common/users/secrets.yml";
       };
     };
   };

@@ -7,12 +7,12 @@
   programs.zsh.enable = config.hostSpec.enableZsh;
   users.mutableUsers = false;
 
-  sops.secrets = lib.mkIf (inputs ? "sops-nix") (lib.foldlAttrs (_: name: { sopsFile, ... }: {
+  sops.secrets = lib.mkIf (inputs ? "sops-nix") (lib.foldlAttrs (acc: name: { sopsFile, ... }: {
     "${name}_password" = {
       inherit sopsFile;
       neededForUsers = true;
     };
-  }) {} config.userSpec);
+  } // acc) {} config.userSpec);
 
   users.users = (
     lib.foldlAttrs (_: name: _: {

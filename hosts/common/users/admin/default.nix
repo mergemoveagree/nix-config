@@ -1,11 +1,10 @@
 { config
-, lib
 , ...
 }: {
   sops.secrets = {
     "admin_password" = {
       neededForUsers = true;
-      sopsFile = lib.custom.relativeToRoot "home/secrets.yml";
+      sopsFile = ../secrets.yml;
     };
   };
 

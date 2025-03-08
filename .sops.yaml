@@ -6,7 +6,7 @@ keys:
     - &user_home age1fqgqugs3xk430tleutumc6ppk3l26expcszhhn4l0d3p7erf2ses5neg2j
   - &hosts:
     - &teemo age1350z7mj0neqfh7xduxzl7w5394qugclchv56s59az6kyy4m67pwsdlykcs
-    - &thinkpadx1 age1pxh8cfm2c5kr3hlsvkperfnzs73kemn3fr64c0cavvghnh68jpfsgck4ks
+    - &thinkpadx1 age180avs6dn88g46rahrt7gapdkqf4xvyy6fydnkgt74qrgkvhltsdqhda4v0
     - &asrock age1jgfvjm4l78e8gg0e3k29xy74dtutegayy0wzeeqk2jvtt6mahsqq6p7uy7
     - &malthor age1hcqsre7g46mu2209guwru95c7rnwzd0f2s3n2tqu4hr8dcrvj3pq4a7c9g
     - &hyeonseong age1c7wcyzy89z4506mewcn3z54wae0hc47ns7m89c3csyxpx0zcmefsdpjc3e
@@ -22,8 +22,8 @@ creation_rules:
         - *asrock
         - *malthor
         - *hyeonseong
-  # General secrets for all users
-  - path_regex: home/secrets.yml$
+  # General host-level secrets for all users
+  - path_regex: hosts/common/users/secrets.yml$
     key_groups:
       - pgp:
         - *user

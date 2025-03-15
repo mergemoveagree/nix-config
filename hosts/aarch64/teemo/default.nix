@@ -13,8 +13,6 @@
       "hosts/common/users/user"
 
       "hosts/common/features/sops.nix"
-
-      "modules/features/wg-client.nix"
     ])
 
     ./matrix-synapse
@@ -25,6 +23,7 @@
     ./ntfy.nix
     ./unbound.nix
     ./njalla-ddns.nix
+    ./wg-client.nix
   ];
 
   hostSpec = {
@@ -34,16 +33,6 @@
     isServer = true;
     hasRTC = false;
     enableHomeManager = false;
-  };
-
-  custom-wg-client = {
-    enable = true;
-    defaultGateway = "192.168.1.254";
-    server = {
-      interfaceIp = "10.100.0.2";
-      endpoint = "185.141.216.3";
-      publicKey = "F12Gr+EGqxNdgB5iUnNrCrrdVwWJKQH6SdZ8gOJO0Q8=";
-    };
   };
 
   hardware.raspberry-pi."4".apply-overlays-dtmerge.enable = true;

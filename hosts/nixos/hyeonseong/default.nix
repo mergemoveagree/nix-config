@@ -41,23 +41,14 @@
     interfaces.${config.hostSpec.netInterface} = {
       useDHCP = false;
       ipv4.addresses = [{
-        address = "65.87.7.200";
+        address = "185.141.216.3";
         prefixLength = 24;
-      }];
-      ipv6.addresses = [{
-        address = "2a0f:85c1:356:1e3e::1";
-        prefixLength = 48;
       }];
     };
     defaultGateway = {
-      address = "65.87.7.1";
+      address = "185.141.216.1";
       interface = config.hostSpec.netInterface;
     };
-    defaultGateway6 = {
-      address = "2a0f:85c1:356::1";
-      interface = config.hostSpec.netInterface;
-    };
-    search = [ "us.kyun.network" ];
     nameservers = [ "9.9.9.9" "1.1.1.1" "1.0.0.1" ];
   };
 

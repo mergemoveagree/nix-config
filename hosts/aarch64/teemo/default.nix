@@ -41,7 +41,7 @@
     defaultGateway = "192.168.1.254";
     server = {
       interfaceIp = "10.100.0.2";
-      endpoint = "65.87.7.200";
+      endpoint = "185.141.216.3";
       publicKey = "F12Gr+EGqxNdgB5iUnNrCrrdVwWJKQH6SdZ8gOJO0Q8=";
     };
   };

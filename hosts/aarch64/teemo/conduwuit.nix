@@ -2,17 +2,16 @@
 , pkgs
 , ...
 }: let
-  main = "leftrmodule.com";
-  fqdn = "matrix.${main}";
+  unix_socket_path = "/run/conduwuit/conduwuit.sock";
+  server_name = "leftrmodule.com";
+  fqdn = "matrix.${server_name}";
   baseUrl = "https://${fqdn}";
 in {
-  imports = [
-    ./postgresql.nix
-  ];
-
-  sops.secrets."matrix-synapse_extra_config" = {
-    owner = "matrix-synapse";
-    sopsFile = ../secrets.yml;
+  sops.secrets."conduwuit_registration_token" = {
+    owner = "conduwuit";
+    group = "nginx";
+    mode = "0660";
+    sopsFile = ./secrets.yml;
   };
 
   services.nginx.virtualHosts = let
@@ -27,14 +26,13 @@ in {
     };
     extraConfig = ''
       proxy_pass_request_headers on;
-      proxy_read_timeout 60s;
       proxy_headers_hash_max_size 512;
       proxy_headers_hash_bucket_size 128;
     '';
   in {
-      ${main} = {
+      ${server_name} = {
         forceSSL = true;
-        useACMEHost = "leftrmodule.com-main";
+        useACMEHost = "leftrmodule.com";
         locations = {
           "= /.well-known/matrix/server" = mkWellKnown serverConfig;
           "= /.well-known/matrix/client" = mkWellKnown clientConfig;
@@ -42,22 +40,22 @@ in {
       };
       ${fqdn} = {
         forceSSL = true;
-        useACMEHost = "leftrmodule.com";
+        useACMEHost = "leftrmodule.com-wildcard";
         locations = {
           "/".extraConfig = ''
             return 404;
           '';
           "~ ^(/_matrix|/_synapse/client)" = {
-            proxyPass = "http://127.0.0.1:8008";
+            proxyPass = "http://unix:${unix_socket_path}";
             extraConfig = ''
               ${extraConfig}
               proxy_http_version 1.1;
-              client_max_body_size 50M;
+              client_max_body_size 20M;
             '';
           };
         };
       };
-    "element.${main}" = let
+    "element.${server_name}" = let
       recommendedCfg = ''
         add_header X-Frame-Options SAMEORIGIN;
         add_header X-Content-Type-Options nosniff;
@@ -66,7 +64,7 @@ in {
       '';
     in {
       forceSSL = true;
-      useACMEHost = "leftrmodule.com";
+      useACMEHost = "leftrmodule.com-wildcard";
       serverAliases = [ "element.${fqdn}" ];
       locations."/".extraConfig = ''
         ${recommendedCfg}
@@ -79,29 +77,24 @@ in {
     };
   };
 
-  services.matrix-synapse = {
+  services.conduwuit = {
     enable = true;
+    group = "nginx";
     settings = {
-      server_name = main;
-      public_baseurl = baseUrl;
-      listeners = [
-        {
-          bind_addresses = [ "127.0.0.1" ];
-          port = 8008;
-          type = "http";
-          tls = false;
-          x_forwarded = true;
-          resources = [
-            {
-              names = [ "client" "federation" ];
-              compress = true;
-            }
-          ];
-        }
-      ];
+      global = {
+        inherit 
+          server_name
+          unix_socket_path
+        ;
+        address = null;
+        port = [ ];
+        new_user_displayname_suffix = "💡";
+        ip_lookup_strategy = 1;
+        allow_registration = true;
+        registration_token_file = config.sops.secrets."conduwuit_registration_token".path;
+        lockdown_public_room_directory = true;
+        allow_room_creation = false;
+      };
     };
-    extraConfigFiles = [
-      config.sops.secrets."matrix-synapse_extra_config".path
-    ];
   };
 }

@@ -15,9 +15,9 @@
       "hosts/common/features/sops.nix"
     ])
 
-    ./matrix-synapse
     ./acme.nix
     ./adguard.nix
+    ./conduwuit.nix
     ./fail2ban.nix
     ./nginx.nix
     ./ntfy.nix

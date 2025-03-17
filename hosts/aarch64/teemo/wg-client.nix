@@ -7,7 +7,7 @@
     firewall.allowedUDPPorts = [ 51820 ];
     interfaces.${config.hostSpec.netInterface}.ipv4.routes = [{
       address = "185.141.216.3";
-      prefixLength = 24;
+      prefixLength = 32;
       via = "192.168.1.254";
     }];
     wireguard = {

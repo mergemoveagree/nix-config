@@ -2,3 +2,4 @@ home/user/global/mail.nix filter=git-crypt diff=git-crypt
 hosts/common/features/monero.nix filter=git-crypt diff=git-crypt
 hosts/nixos/hyeonseong/nginx.nix filter=git-crypt diff=git-crypt
 hosts/aarch64/teemo/nginx.nix filter=git-crypt diff=git-crypt
+hosts/aarch64/teemo/conduwuit.nix filter=git-crypt diff=git-crypt

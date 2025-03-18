@@ -19,7 +19,7 @@
       "hosts/common/features/hyprland"
     ])
 
-    ./hardware-configuration.nix
+    ./wg-client.nix
   ];
 
   hostSpec = {

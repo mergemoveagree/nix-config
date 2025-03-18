@@ -44,6 +44,10 @@
             publicKey = "ZBWpfR4URU4UoO26ojoqIBoWCqrleuZ73MTDe6GtFAs=";
             allowedIPs = [ "10.100.0.3/32" ];
           }
+          {
+            publicKey = "iQO0xai90sjlIZv7DN1Mf0z5F5VfQ7SVGiJQ6S1H3zc=";
+            allowedIPs = [ "10.100.0.4/32" ];
+          }
         ];
       };
     };

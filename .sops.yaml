@@ -47,6 +47,13 @@ creation_rules:
         - *user
         age:
         - *user_home
+  # Secrets for the thinkpadx1 host
+  - path_regex: hosts/nixos/thinkpadx1/secrets.yml$
+    key_groups:
+      - pgp:
+        - *user
+        age:
+        - *thinkpadx1
   # Secrets for the teemo host
   - path_regex: hosts/aarch64/teemo/secrets.yml$
     key_groups:

@@ -34,14 +34,14 @@
       };
 
       "hyeonseong" = {
-        hostname = "185.141.216.3";
+        hostname = "65.87.7.78";
         identitiesOnly = true;
         identityFile = config.sops.secrets."ssh_user_hyeonseong_access_private_key".path;
         user = "user";
       };
 
       "hyeonseong-update" = {
-        hostname = "185.141.216.3";
+        hostname = "65.87.7.78";
         identitiesOnly = true;
         identityFile = config.sops.secrets."ssh_user_hyeonseong_update_private_key".path;
         user = "root";

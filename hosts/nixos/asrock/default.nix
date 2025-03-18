@@ -22,6 +22,8 @@ in {
       "hosts/common/features/monero.nix"
       "hosts/common/features/opencl.nix"
     ])
+
+    ./wg-client.nix
   ];
 
   hostSpec = {

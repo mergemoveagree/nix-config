@@ -33,6 +33,13 @@ creation_rules:
         - *asrock
         - *malthor
         - *hyeonseong
+  # Secrets for the asrock host
+  - path_regex: hosts/nixos/asrock/secrets.yml$
+    key_groups:
+      - pgp:
+        - *user
+        age:
+        - *asrock
   # Personal secrets for primary user
   - path_regex: home/user/secrets.yml$
     key_groups:

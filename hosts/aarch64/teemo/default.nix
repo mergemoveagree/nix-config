@@ -54,7 +54,7 @@
       address = "192.168.1.254";
       interface = config.hostSpec.netInterface;
     };
-    firewall.allowedTCPPorts = [ 443 80 ];
+    firewall.allowedTCPPorts = [ 443 80 2223 ];
   };
 
   sops.secrets = {
@@ -75,6 +75,10 @@
     enable = true;
     openFirewall = true;
     settings.PermitRootLogin = lib.mkForce "prohibit-password";
+    listenAddresses = [
+      { addr = "10.100.0.1"; port = 2223; }
+      { addr = "0.0.0.0"; }
+    ];
   };
 
   # initrd SSH

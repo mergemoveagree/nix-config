@@ -1,6 +1,5 @@
 { lib
 , pkgs
-, config
 , ...
 }: {
   imports = lib.flatten [
@@ -26,14 +25,4 @@
   ];
 
   services.easyeffects.preset = "Perfect EQ";
-
-  programs.ssh.matchBlocks = {
-    "teemo-vps" = {
-      hostname = "10.100.0.2";
-      identitiesOnly = true;
-      identityFile = config.sops.secrets."ssh_user_teemo_access_private_key".path;
-      user = "user";
-      port = 2223;
-    };
-  };
 }

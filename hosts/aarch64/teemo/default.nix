@@ -60,6 +60,7 @@
   sops.secrets = {
     "teemo_initrd_ed25519_private_key".sopsFile = lib.custom.relativeToRoot "hosts/aarch64/teemo/secrets.yml";
     "teemo_initrd_rsa_private_key".sopsFile = lib.custom.relativeToRoot "hosts/aarch64/teemo/secrets.yml";
+    "teemo_initrd_wireguard_private_key".sopsFile = lib.custom.relativeToRoot "hosts/aarch64/teemo/secrets.yml";
   };
 
   users.users = {
@@ -79,7 +80,11 @@
 
   # initrd SSH
   boot.kernelParams = [ "ip=192.168.1.3::192.168.1.254:255.255.255.0:teemo::none" ];
+  boot.initrd.secrets = {
+    "/etc/secrets/30-wg-initrd.key" = config.sops.secrets."teemo_initrd_wireguard_private_key".path;
+  };
   boot.initrd.availableKernelModules = [
+    "wireguard"
     "genet"
     "brcmfmac"
     "algif_skcipher"
@@ -105,5 +110,44 @@
       shell = lib.mkIf (!config.boot.initrd.systemd.enable) "/bin/cryptsetup-askpass";
     };
   };
-  boot.initrd.systemd.users.root.shell = lib.mkIf config.boot.initrd.systemd.enable "/bin/systemd-tty-ask-password-agent"; 
+  boot.initrd.systemd = {
+    enable = true;
+    #users.root.shell = lib.mkIf config.boot.initrd.systemd.enable "/bin/systemd-tty-ask-password-agent";
+    initrdBin = [
+      pkgs.iproute2
+      pkgs.unixtools.ping
+      pkgs.wireguard-tools
+    ];
+    network = {
+      netdevs."30-wg-initrd" = {
+        netdevConfig = {
+          Kind = "wireguard";
+          Name = "wg-initrd";
+        };
+        wireguardConfig = { PrivateKeyFile = "/etc/secrets/30-wg-initrd.key"; };
+        wireguardPeers = [{
+          PublicKey = "F12Gr+EGqxNdgB5iUnNrCrrdVwWJKQH6SdZ8gOJO0Q8=";
+          AllowedIPs = [ "10.100.0.0/24" ];
+          Endpoint = "65.87.7.78:51820";
+          PersistentKeepalive = 25;
+        }];
+      };
+      networks."30-wg-initrd" = {
+        name = "wg-initrd";
+        addresses = [{ Address = "10.100.0.5/24"; }];
+      };
+    };
+  };
+  boot.initrd.systemd.services.wg-initrd-key-perms = {
+    description = "Fix wireguard private key permissions";
+    wantedBy = [ "initrd.target" ];
+    before = [ "systemd-networkd.service" ];
+    after = [ "initrd-nixos-copy-secrets.service" ];
+    unitConfig.DefaultDependencies = "no";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      chmod 0400 /etc/secrets/30-wg-initrd.key
+      chown systemd-network: /etc/secrets/30-wg-initrd.key
+    '';
+  };
 }

@@ -48,6 +48,10 @@
             publicKey = "iQO0xai90sjlIZv7DN1Mf0z5F5VfQ7SVGiJQ6S1H3zc=";
             allowedIPs = [ "10.100.0.4/32" ];
           }
+          {
+            publicKey = "m+AkPisVvwT+G1AxHahERxlzwZUR+iVN+zCmne+j6Rg=";
+            allowedIPs = [ "10.100.0.5/32" ];
+          }
         ];
       };
     };

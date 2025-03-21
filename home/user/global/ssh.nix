@@ -12,7 +12,7 @@
     enable = true;
     matchBlocks = {
       "teemo" = {
-        hostname = "192.168.1.3";
+        hostname = "10.100.0.2";
         identitiesOnly = true;
         identityFile = config.sops.secrets."ssh_user_teemo_access_private_key".path;
         user = "user";
@@ -20,6 +20,7 @@
 
       "teemo-unlock" = {
         hostname = "192.168.1.3";
+        #hostname = "10.100.0.5";
         identitiesOnly = true;
         identityFile = config.sops.secrets."ssh_user_teemo_access_private_key".path;
         user = "root";
@@ -27,21 +28,21 @@
       };
 
       "teemo-update" = {
-        hostname = "192.168.1.3";
+        hostname = "10.100.0.2";
         identitiesOnly = true;
         identityFile = config.sops.secrets."ssh_user_teemo_update_private_key".path;
         user = "root";
       };
 
       "hyeonseong" = {
-        hostname = "65.87.7.78";
+        hostname = "10.100.0.1";
         identitiesOnly = true;
         identityFile = config.sops.secrets."ssh_user_hyeonseong_access_private_key".path;
         user = "user";
       };
 
       "hyeonseong-update" = {
-        hostname = "65.87.7.78";
+        hostname = "10.100.0.1";
         identitiesOnly = true;
         identityFile = config.sops.secrets."ssh_user_hyeonseong_update_private_key".path;
         user = "root";
